@@ -1,0 +1,32 @@
+<div class="navbar bg-base-100 shadow-sm">
+  <div class="navbar-start">
+    <div class="dropdown">
+      <div tabindex="0" role="button" class="btn btn-ghost lg:hidden">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h8m-8 6h16" /> </svg>
+      </div>
+      <ul
+        tabindex="0"
+        class="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
+        <li><a class="btn btn-primary" href="{% url 'signup' %}">Borrow Book</a></li>
+        <li><a>Review</a></li>
+      </ul>
+    </div>
+    <button><a class="font-bold" href="{% url 'home' %}"><sup><span class="text-[2.5rem] google-sans-code-cursive">BookLoop</span></sup><sub class="cedarville-cursive-regular text-[1rem]"><span>Borrow, Return, Pay back</span></sub></a></button>
+  </div>
+  <div class="navbar-center hidden lg:flex">
+    <ul class="menu menu-horizontal px-1">
+      <li><a href="{% url 'signup' %}">Borrow Book</a></li>
+      <li><a>Review</a></li>
+    </ul>
+  </div>
+  <div class="navbar-end">
+    <div class="flex gap-[5px]">
+    {% if user.is_authenticated %}
+    <a class="btn btn-error" href="{% url 'logout' %}">Log Out</a>
+    {% else %}
+    <a class="btn btn-warning" href="{% url 'signup' %}">Sign Up</a>
+    <a class="btn btn-primary" href="{% url 'login' %}">Log In</a>
+    {% endif %}
+    </div>
+  </div>
+</div>
