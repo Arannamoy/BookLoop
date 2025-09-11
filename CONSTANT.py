@@ -1,3 +1,3 @@
 GENDER=(("Male","Male"),("Female","Female"))
-USER_TYPE=(("ADMINISTRATIVE","ADMINISTRATIVE"),("GENERAL USER","GENERAL USER"))
+USER_TYPE=(("ADMIN","ADMIN"),("USER","USER"))
 RATING=(("⭐⭐⭐⭐⭐","⭐⭐⭐⭐⭐"),("⭐⭐⭐⭐","⭐⭐⭐⭐"),("⭐⭐⭐","⭐⭐⭐"),("⭐⭐","⭐⭐"),("⭐","⭐"))
