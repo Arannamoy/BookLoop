@@ -68,7 +68,7 @@ git reset --hard HEAD~1
 |Code Part|Status|
 |----------|----|
 |book.models|Done|
-|categorys.model|X|
+|categorys.model|Done|
 |users.models|Done|
 |users.forms|Done|
 |users.views|Done|
