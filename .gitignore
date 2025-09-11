@@ -1,4 +1,5 @@
 .env
+.venv
 books
 borrow_records
 categorys
