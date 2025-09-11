@@ -1,3 +1,10 @@
+### Table Of Contents
+- [223](#223-1)
+- [8](#8)
+- [12](#12-1)
+- [14](#14-1)
+- [24](#24-1)
+
 ## Commands
 
 - cancel commit & remove code
@@ -5,24 +12,81 @@
 git reset --hard HEAD~1
 ```
 
-## Code Part:
 
-#### 223
-- books(1) - all
+## Contribution status
 
-#### 08
-- borrow_records(2) - templates,views
-- disscussions(4) - templates,views
 
-#### 12
-- borrow_records(2) - model,urls,admin
-- disscussions(4) - model,urls,admin
-- reviews(5) - templates
+### 223
 
-#### 14
-- categorys(3) - all
-- borrow_records(2) - templates
+|Code Part|Status|
+|----------|----|
+|books.forms|X|
+|books.views|X|
+|books.urls|X|
+|books.templates.books.html|X|
+|books.templates.book.html|X|
+|transaction.model|X|
 
-#### 24
-- users(7) - all
-- transactions(6) - all
+### 8
+
+
+|Code Part|Status|
+|----------|----|
+|borrow_records.forms|X|
+|borrow_records.templates|X|
+|borrow_records.urls|X|
+|borrow_records.views|X|
+|disscussions.templates|X|
+|disscussions.views|X|
+|disscussions.forms|X|
+
+
+### 12
+
+|Code Part|Status|
+|----------|----|
+|borrow_records.urls|X|
+|borrow_records.models|X|
+|borrow_records.admin|X|
+|disscussions.model|X|
+|disscussions.admin|X|
+|disscussions.urls|X|
+|reviews.templates|X|
+|reviews.forms|X|
+
+
+### 14
+
+|Code Part|Status|
+|----------|----|
+|borrow_records.templates|X|
+|categorys.views|X|
+
+
+### 24
+
+|Code Part|Status|
+|----------|----|
+|book.models|Done|
+|categorys.model|X|
+|users.models|Done|
+|users.forms|Done|
+|users.views|Done|
+|users.urls|Done|
+|transactions.forms|X|
+|transactions.views|X|
+|transactions.urls|X|
+|email verification|X|
+
+
+
+
+
+#### Requirements.txt without version
+
+```bash
+pip freeze | python -c "for p in __import__('sys').stdin: print(p.split('=')[0])" > requirements.txt
+```
+
+
+### root@1234

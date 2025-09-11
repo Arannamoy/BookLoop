@@ -1,8 +1,4 @@
 .env
 .venv
-books
-borrow_records
-categorys
-discussions
-reviews
-transactions
+__pycache__
+migrations
