@@ -1,11 +1,12 @@
 from django.shortcuts import render,redirect
-from .forms import SignUpForm,DepositForm
+from .forms import SignUpForm,DepositForm,UserUpdateForm
 from django.views import generic
 from django.urls import reverse_lazy
 from django.contrib.auth.views import LoginView,LogoutView
 from django.contrib.auth import logout
 from .models import User as UserModel
 from transactions.models import Transaction as TransactionModel
+from django.views import View
 # Create your views here.
 
 class SignUpView(generic.FormView):
@@ -36,8 +37,6 @@ class LogOutView(generic.View):
            logout(request)
            return redirect('home')
      
-
-
 def depositView(request):
      if request.user.is_authenticated:
           if request.method=="POST":
@@ -53,3 +52,43 @@ def depositView(request):
           return render(request,'deposit_form.html',{'form':DepositForm()})
      else:
           return redirect('login')
+
+
+
+class UserUpdateView(View):
+    template_name = 'profile.html'
+
+    def get(self, request):
+        if request.user.is_authenticated:
+            form = UserUpdateForm(instance=request.user)
+            return render(request, self.template_name, {'form': form})
+        else:
+             return redirect('login')
+
+    def post(self, request):
+        form = UserUpdateForm(request.POST, instance=request.user)
+        if form.is_valid():
+            form.save()
+            return redirect('profile')  
+        return render(request, self.template_name, {'form': form})
+    
+
+
+def updateUserProfile(r):
+    if r.user.is_authenticated:
+       if r.method=='POST':
+            data=r.POST
+            # first_name=data['first_name']
+            # last_name=data['last_name']
+            contact_no=data['contact_no']
+            user_image=r.FILES.get('user_image')
+            user=UserModel.objects.get(user=r.user)
+            #user
+            user.user_image=user_image
+            user.save()
+            print(user_image)
+            return redirect('update-user-profile')
+       else:
+          return render(r,'update_profile_t.html')
+    else:
+         return redirect('login')

@@ -104,3 +104,42 @@ class DepositForm(forms.ModelForm):
     class Meta:
         model = UserModel
         fields = ['balance']
+
+
+class UserUpdateForm(forms.ModelForm):
+    birth_date = forms.DateField(widget=forms.DateInput(attrs={'type':'date'}))
+    gender = forms.ChoiceField(choices=GENDER)
+    class Meta:
+        model = User
+        fields = ['first_name', 'last_name', 'email']
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field in self.fields:
+            self.fields[field].widget.attrs.update({
+                'class': (
+                    'appearance-none block w-full bg-gray-200 '
+                    'text-gray-700 border border-gray-200 rounded '
+                    'py-3 px-4 leading-tight focus:outline-none '
+                    'focus:bg-white focus:border-gray-500'
+                )
+            })
+        # jodi user er account thake 
+        if self.instance:
+            try:
+                user_account = self.instance.user_acc
+            except UserModel.DoesNotExist:
+                user_account = None
+                user_address = None
+
+            if user_account:
+                self.fields['gender'].initial = user_account.gender
+
+    def save(self, commit=True):
+        user = super().save(commit=False)
+        if commit:
+            user.save()
+            user_account, created = UserModel.objects.get_or_create(user=user) 
+            user_account.gender = self.cleaned_data['gender']
+            user_account.save()
+        return user        
