@@ -98,3 +98,9 @@ class SignUpForm(UserCreationForm):
          )
          })
         )
+
+
+class DepositForm(forms.ModelForm):
+    class Meta:
+        model = UserModel
+        fields = ['balance']

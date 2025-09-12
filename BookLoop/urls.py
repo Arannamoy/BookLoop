@@ -22,6 +22,7 @@ from .views import homeView
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',homeView,name='home'),
-    path('user/',include('users.urls'))
+    path('user/',include('users.urls')),
+    path('transaction/',include('transactions.urls'))
 ]
 urlpatterns += static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

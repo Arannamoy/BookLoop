@@ -25,7 +25,7 @@ git reset --hard HEAD~1
 |books.urls|X|
 |books.templates.books.html|X|
 |books.templates.book.html|X|
-|transaction.model|X|
+
 
 ### 8
 
@@ -73,11 +73,11 @@ git reset --hard HEAD~1
 |users.forms|Done|
 |users.views|Done|
 |users.urls|Done|
-|transactions.forms|X|
+|transactions.forms|Done|
 |transactions.views|X|
-|transactions.urls|X|
+|transactions.urls|Done|
 |email verification|X|
-
+|transaction.model|Done|
 
 
 
