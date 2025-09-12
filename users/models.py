@@ -6,7 +6,7 @@ from CONSTANT import *
 
 
 class User(models.Model):
-    user=models.ForeignKey(User,related_name="user_acc",on_delete=models.CASCADE)
+    user=models.OneToOneField(User,related_name="user_acc",on_delete=models.CASCADE)
     email=models.EmailField(unique=True)
     contact_no=models.CharField(max_length=11,unique=True)
     borrowed_books=models.ManyToManyField(Book, related_name='borrowed_books', blank=True)

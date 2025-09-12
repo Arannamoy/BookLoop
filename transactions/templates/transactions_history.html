@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="flex justify-center  w-[90%]">
+    <div>
+        <table class="table table-pin-rows w-[100%]">
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Transaction Type</th>
+        <th>Amount</th>
+        <th>Time</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for transaction in transactions %}
+    {% if transaction.transaction_type == 'Credit' %}
+    <tr class="bg-lime-500">
+        <th>{{transaction.id}}</th>
+        <td >{{transaction.transaction_type}}</td>
+        <td>{{transaction.amount}}</td>
+        <td>{{transaction.created_at}}</td>
+      </tr>
+      {% else %}
+       <tr class="bg-red-500">
+        <th>{{transaction.id}}</th>
+        <td >{{transaction.transaction_type}}</td>
+        <td>{{transaction.amount}}</td>
+        <td>{{transaction.created_at}}</td>
+      </tr>
+      {% endif %}
+    {% endfor %}
+    </tbody>
+    <tfoot>
+      <tr>
+        <th>Id</th>
+        <th>Transaction Type</th>
+        <th>Amount</th>
+        <th>Time</th>
+      </tr>
+    </tfoot>
+  </table>
+    </div>
+</div>
+{% endblock %}
