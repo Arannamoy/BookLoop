@@ -74,7 +74,7 @@ git reset --hard HEAD~1
 |users.views|Done|
 |users.urls|Done|
 |transactions.forms|Done|
-|transactions.views|X|
+|transactions.views|Done|
 |transactions.urls|Done|
 |email verification|X|
 |transaction.model|Done|
