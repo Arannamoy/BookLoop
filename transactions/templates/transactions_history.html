@@ -8,7 +8,9 @@
         <th>Id</th>
         <th>Transaction Type</th>
         <th>Amount</th>
+        <th>Status</th>
         <th>Time</th>
+        <th>Reference</th>
       </tr>
     </thead>
     <tbody>
@@ -18,7 +20,9 @@
         <th>{{transaction.id}}</th>
         <td >{{transaction.transaction_type}}</td>
         <td>{{transaction.amount}}</td>
+        <td>{{transaction.payment_status}}</td>
         <td>{{transaction.created_at}}</td>
+        <td>{{transaction.reference}}</td>
       </tr>
       {% else %}
        <tr class="bg-red-500">
@@ -35,7 +39,9 @@
         <th>Id</th>
         <th>Transaction Type</th>
         <th>Amount</th>
+        <th>Status</th>
         <th>Time</th>
+        <th>Reference</th>
       </tr>
     </tfoot>
   </table>

@@ -17,11 +17,12 @@
     <ul class="menu menu-horizontal px-1 gap-[10px]">
       <li><a href="{% url 'signup' %}">Borrow Book</a></li>
       <li><a>Review</a></li>
+      {% if user.is_authenticated %}
       <li><a href="{% url 'update-profile' %}" class="btn btn-warning">Profile</a></li>
       <li><a href="{% url 'update-user-profile' %}" class="btn btn-warning">update-user-profile-test</a></li>
-    
-    <li><a class="btn btn-warning" href="{% url 'transaction_history' %}">Transaction History</a></li>
-    <li><a class="btn btn-primary" href="{% url 'deposit' %}">Deposit</a></li>
+      <li><a class="btn btn-warning" href="{% url 'transaction_history' %}">Transaction History</a></li>
+      <li><a class="btn btn-primary" href="{% url 'deposit' %}">Deposit</a></li>
+      {% endif %}
     </ul>
   </div>
   <div class="navbar-end">

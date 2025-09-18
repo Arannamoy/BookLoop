@@ -15,7 +15,7 @@ class SignUpForm(UserCreationForm):
     def save(self, commit = True):
         user1 = super().save(commit=True)
         if commit == True:
-            user1.is_active=False
+            # user1.is_active=False
             user1.save()
             gender1 = self.cleaned_data.get('gender')
             dob1=self.cleaned_data.get('dob')
