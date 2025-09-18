@@ -49,12 +49,12 @@ git reset --hard HEAD~1
 
 |Code Part|Status|
 |----------|----|
-|books.forms|X|
-|books.views|X|
-|books.urls|X|
-|books.templates.books.html|X|
-|books.templates.book.html|X|
-
+|disscussions.model|X|
+|disscussions.admin|X|
+|disscussions.urls|X|
+|reviews.models|X|
+|reviews.templates|X|
+|reviews.forms|X|
 
 ### 8
 
@@ -77,12 +77,10 @@ git reset --hard HEAD~1
 |borrow_records.urls|X|
 |borrow_records.models|X|
 |borrow_records.admin|X|
-|disscussions.model|X|
-|disscussions.admin|X|
-|disscussions.urls|X|
-|reviews.models|X|
-|reviews.templates|X|
-|reviews.forms|X|
+|books.forms|NA|
+|books.views|X|
+|books.urls|X|
+|books.templates.books.html|X|
 
 
 ### 14
