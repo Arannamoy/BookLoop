@@ -23,10 +23,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-!$94mu9)vnf27o8na29v(!am*9h+_6#hv513v&*v(_zu#4u&18'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = ["localhost:8000","bookloop-s6np.onrender.com"]
+CSRF_TRUSTED_ORIGINS = ['https://bookloop-s6np.onrender.com/','http://localhost:8000']
 
 # Application definition
 
@@ -73,6 +73,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'BookLoop.wsgi.application'
 
+# WSGI_APPLICATION = 'BookLoop.wsgi.app'
 
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
