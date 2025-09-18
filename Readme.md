@@ -51,6 +51,7 @@ git reset --hard HEAD~1
 |disscussions.model|X|
 |disscussions.admin|X|
 |disscussions.urls|X|
+|reviews.models|X|
 |reviews.templates|X|
 |reviews.forms|X|
 
