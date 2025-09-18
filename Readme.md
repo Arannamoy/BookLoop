@@ -7,7 +7,35 @@
 
 ## Commands
 
+- 1 project clone 
+
+```bash
+git clone https://github.com/Arannamoy-Mondal/BookLoop.git
+```
+
+- 2 
+
+```bash 
+git branch osman
+```
+
+- 3
+
+```bash
+git checkout osman
+```
+
+- 4
+```bash
+git add . && git commit -m ""
+```
+- 5
+```bash
+git push origin osman
+```
+
 - cancel commit & remove code
+
 ```bash
 git reset --hard HEAD~1
 ```
