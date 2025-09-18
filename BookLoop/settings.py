@@ -11,7 +11,9 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 from pathlib import Path
-
+from dotenv import load_dotenv
+import os
+load_dotenv()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -20,13 +22,14 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-!$94mu9)vnf27o8na29v(!am*9h+_6#hv513v&*v(_zu#4u&18'
+
+
+SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = ["localhost","bookloop-s6np.onrender.com"]
+CSRF_TRUSTED_ORIGINS = ['https://bookloop-s6np.onrender.com','http://localhost:8000']
 
 # Application definition
 
@@ -58,7 +61,7 @@ ROOT_URLCONF = 'BookLoop.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['templates'],
+        'DIRS': ['global_templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -73,6 +76,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'BookLoop.wsgi.application'
 
+# WSGI_APPLICATION = 'BookLoop.wsgi.app'
 
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
@@ -123,11 +127,13 @@ STATIC_URL = 'static/'
 
 # START:Added by Arannamoy-Mondal
 STATICFILES_DIRS = [
-    BASE_DIR / "static",  # For project-level static files
+    BASE_DIR /"static",  # For project-level static files
 ]
 
-MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / 'media'
+STATIC_ROOT = BASE_DIR/"staticfiles" 
+
+MEDIA_URL ='/media/'
+MEDIA_ROOT = BASE_DIR /'media'
 # END:Added by Arannamoy-Mondal
 
 # Default primary key field type
