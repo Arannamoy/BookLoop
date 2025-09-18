@@ -20,12 +20,16 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-!$94mu9)vnf27o8na29v(!am*9h+_6#hv513v&*v(_zu#4u&18'
+from dotenv import load_dotenv
+import os
+load_dotenv()
+
+SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
-
-ALLOWED_HOSTS = ["localhost","bookloop-s6np.onrender.com"]
+DEBUG = True
+# "localhost","bookloop-s6np.onrender.com"
+ALLOWED_HOSTS = ["*"]
 CSRF_TRUSTED_ORIGINS = ['https://bookloop-s6np.onrender.com/','http://localhost:8000']
 
 # Application definition
@@ -58,7 +62,7 @@ ROOT_URLCONF = 'BookLoop.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['templates'],
+        'DIRS': ['global_templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
