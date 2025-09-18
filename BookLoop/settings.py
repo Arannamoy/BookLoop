@@ -11,7 +11,9 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 from pathlib import Path
-
+from dotenv import load_dotenv
+import os
+load_dotenv()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -20,9 +22,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-from dotenv import load_dotenv
-import os
-load_dotenv()
+
 
 SECRET_KEY = os.getenv('SECRET_KEY')
 
@@ -128,11 +128,13 @@ STATIC_URL = 'static/'
 
 # START:Added by Arannamoy-Mondal
 STATICFILES_DIRS = [
-    BASE_DIR / "static",  # For project-level static files
+    BASE_DIR /"static",  # For project-level static files
 ]
 
-MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / 'media'
+STATIC_ROOT = BASE_DIR/"staticfiles" 
+
+MEDIA_URL ='/media/'
+MEDIA_ROOT = BASE_DIR /'media'
 # END:Added by Arannamoy-Mondal
 
 # Default primary key field type
