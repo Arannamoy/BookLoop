@@ -13,3 +13,4 @@ class Book(models.Model):
     added_by=models.CharField(max_length=150)
     category=models.ForeignKey(Category,on_delete=models.PROTECT,null=True)
     quantity=models.IntegerField(null=True)
+    total_borrowed_time=models.IntegerField(default=0,null=True)

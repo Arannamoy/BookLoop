@@ -14,3 +14,10 @@
   font-family: "Google Sans Code", cursive;
   font-optical-sizing: auto;
 }
+
+
+.lato-black-italic {
+  font-family: "Lato", sans-serif;
+  font-weight: 900;
+  font-style: italic;
+}
