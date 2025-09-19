@@ -1,3 +1,43 @@
+
+<div class="navbar bg-black py-[25px] px-[25px]">
+  <div class="navbar-start">
+    <div class="dropdown">
+      <div tabindex="0" role="button" class="btn btn-ghost lg:hidden">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h8m-8 6h16" /> </svg>
+      </div>
+      <ul
+        tabindex="0"
+        class="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
+        <li><a class="btn btn-primary font-bold text-[2rem]" href="{% url 'signup' %}">Borrow Book</a></li>
+        <li><a class="btn btn-primary font-bold text-[1.25rem] text-white">Review</a></li>
+      </ul>
+    </div>
+    <div class="navbar-start">
+    
+  </div>
+  </div>
+  <div class="navbar-center hidden lg:flex">
+    <button><a class="font-bold" href="{% url 'home' %}"><sup><span class="text-[2.5rem]  text-white lato-black-italic font-bold">BookLoop</span></sup><sub class="cedarville-cursive-regular text-[1.5rem] text-white"><span>Borrow, Return, Pay back</span></sub></a></button>
+  </div>
+  <div class="navbar-end">
+    <div class="flex gap-[5px]">
+    {% if user.is_authenticated %}
+    
+    <a class="btn btn-warning text-[1.5rem]">Balance: {{ user.user_acc.balance }}</a>
+    <a class="btn btn-error text-[1.5rem]" href="{% url 'logout' %}">Log Out</a>
+    {% else %}
+    <a class="btn btn-warning text-[1.25rem]" href="{% url 'signup' %}">Sign Up</a>
+    <a class="btn btn-warning text-[1.25rem]" href="{% url 'login' %}">Log In</a>
+    {% endif %}
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
 <div class="navbar bg-base-100 shadow-sm">
   <div class="navbar-start">
     <div class="dropdown">
@@ -7,35 +47,28 @@
       <ul
         tabindex="0"
         class="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
-        <li><a class="btn btn-primary" href="{% url 'signup' %}">Borrow Book</a></li>
-        <li><a>Review</a></li>
+        <li><a>Item 1</a></li>
+        <li>
+          <a>Parent</a>
+        </li>
+        <li><a>Item 3</a></li>
       </ul>
     </div>
-    <button><a class="font-bold" href="{% url 'home' %}"><sup><span class="text-[2.5rem] google-sans-code-cursive">BookLoop</span></sup><sub class="cedarville-cursive-regular text-[1rem]"><span>Borrow, Return, Pay back</span></sub></a></button>
+
   </div>
   <div class="navbar-center hidden lg:flex">
-    <ul class="menu menu-horizontal px-1 gap-[10px]">
-      <li><a href="{% url 'signup' %}">Borrow Book</a></li>
-      <li><a>Review</a></li>
+    <ul class="menu menu-horizontal px-1 flex gap-[5px]">
       {% if user.is_authenticated %}
-      <li><a href="{% url 'update-profile' %}" class="btn btn-warning">Profile</a></li>
-      <li><a href="{% url 'update-user-profile' %}" class="btn btn-warning">update-user-profile-test</a></li>
-      <li><a class="btn btn-warning" href="{% url 'transaction_history' %}">Transaction History</a></li>
-      <li><a class="btn btn-primary" href="{% url 'deposit' %}">Deposit</a></li>
+      <li><a href="{% url 'update-profile' %}" class="text-[1.25rem]  btn btn-outline  my-[10px] font-bold">Profile</a></li>
+      <li><a class="btn btn-outline text-[1.25rem] my-[10px]">Borrow History</a></li>
+      <li><a class="btn btn-outline text-[1.25rem] my-[10px]" href="{% url 'deposit' %}">Deposit</a></li>
+      <li><a class="btn btn-outline text-[1.25rem] my-[10px]" href="{% url 'transaction_history' %}">Transaction History</a></li>
       {% endif %}
     </ul>
   </div>
   <div class="navbar-end">
-    <div class="flex gap-[5px]">
-    {% if user.is_authenticated %}
-    
-    <a class="btn btn-warning">Balance: {{ user.user_acc.balance }}</a>
-    
-    <a class="btn btn-error" href="{% url 'logout' %}">Log Out</a>
-    {% else %}
-    <a class="btn btn-warning" href="{% url 'signup' %}">Sign Up</a>
-    <a class="btn btn-primary" href="{% url 'login' %}">Log In</a>
-    {% endif %}
-    </div>
   </div>
 </div>
+
+
+

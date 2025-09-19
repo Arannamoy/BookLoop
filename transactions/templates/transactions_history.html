@@ -1,11 +1,11 @@
 {% extends "base.html" %}
 {% block content %}
-<div class="flex justify-center  w-[90%]">
+<div class="flex justify-center  w-[100%]">
     <div>
         <table class="table table-pin-rows w-[100%]">
     <thead>
-      <tr>
-        <th>Id</th>
+      <tr class="text-[1.5rem] text-black">
+        <th>TRX Id</th>
         <th>Transaction Type</th>
         <th>Amount</th>
         <th>Status</th>
@@ -15,27 +15,27 @@
     </thead>
     <tbody>
     {% for transaction in transactions %}
-    {% if transaction.transaction_type == 'Credit' %}
-    <tr class="bg-lime-500">
-        <th>{{transaction.id}}</th>
-        <td >{{transaction.transaction_type}}</td>
-        <td>{{transaction.amount}}</td>
-        <td>{{transaction.payment_status}}</td>
-        <td>{{transaction.created_at}}</td>
-        <td>{{transaction.reference}}</td>
-      </tr>
+    <tr>
+      <th>{{transaction.id}}</th>
+      {% if transaction.transaction_type == 'Credit' %}
+        <td class="flex justify-center "><h1 class="bg-lime-400 border border-solid border-lime-400 p-[15px] rounded-lg">{{transaction.transaction_type}}</h1></td>
       {% else %}
-       <tr class="bg-red-500">
-        <th>{{transaction.id}}</th>
-        <td >{{transaction.transaction_type}}</td>
-        <td>{{transaction.amount}}</td>
-        <td>{{transaction.created_at}}</td>
-      </tr>
+      <td class="flex justify-center "><h1 class="bg-rose-600 border border-solid border-rose-600 p-[15px] rounded-lg">{{transaction.transaction_type}}</h1></td>
       {% endif %}
+      <td>{{transaction.amount}}</td>
+      {% if transaction.payment_status == 'Successful' %}
+        <td class="flex justify-center "><h1 class="bg-lime-400 border border-solid border-lime-400 p-[15px] rounded-lg">{{transaction.payment_status}}</h1>
+        </td>
+      {% else %}
+      <td class="flex justify-center "><h1 class="bg-rose-600 border border-solid border-rose-600 p-[15px] rounded-lg">{{transaction.payment_status}}</h1></td>
+      {% endif %}
+      <td>{{transaction.created_at}}</td>
+      <td>{{transaction.reference}}</td>
+      </tr>
     {% endfor %}
     </tbody>
     <tfoot>
-      <tr>
+      <tr class="text-[1.5rem] text-black">
         <th>Id</th>
         <th>Transaction Type</th>
         <th>Amount</th>
