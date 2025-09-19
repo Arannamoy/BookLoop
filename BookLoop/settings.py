@@ -34,6 +34,7 @@ CSRF_TRUSTED_ORIGINS = ['https://bookloop-s6np.onrender.com','http://localhost:8
 # Application definition
 
 INSTALLED_APPS = [
+    
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -43,7 +44,8 @@ INSTALLED_APPS = [
     'books',
     'categorys',
     'users',
-    'transactions'
+    'transactions',
+    'borrow_records'
 ]
 
 MIDDLEWARE = [

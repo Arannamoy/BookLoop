@@ -23,6 +23,9 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('',homeView,name='home'),
     path('user/',include('users.urls')),
-    path('transaction/',include('transactions.urls'))
+    path('transaction/',include('transactions.urls')),
+    path('borrow/',include('borrow_records.urls')),
+    path('book/',include('books.urls'))
+
 ]
 urlpatterns += static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

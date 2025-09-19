@@ -1,29 +1,28 @@
 {% load static %}
 <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.3.3/dist/tailwind.min.css" rel="stylesheet">
 
-<div class="w-[90%] mx-auto py-8">
-  <div id="carousel" class="relative overflow-hidden rounded-lg">
+<div class="w-[100%] mx-auto py-8 flex flex-wrap justify-center items-center gap-[10px]">
+  <div id="carousel" class="relative overflow-hidden rounded-lg w-[60%]">
     <!-- Slides wrapper -->
     <div class="relative w-full h-64 md:h-96">
       <!-- Slide 1 -->
        
        {% for book in books %}
-       <div class="carousel-slide absolute inset-0 transition-transform duration-700 ease-in-out transform translate-x-0 bg-primary">
-        <div class="flex justify-between lg:flex-row flex-col items-center">
+       <div class="carousel-slide absolute inset-0 transition-transform duration-700 ease-in-out transform translate-x-0 bg-sky-500 flex flex-wrap justify-between lg:flex-row flex-col items-center">
+        <div class="flex flex-wrap justify-between lg:flex-row flex-col items-center">
             <div class="w-[50%] flex justify-center items-center">
             <img src="{{ book.book_image.url }}" alt="Slide 1" class="w-[250px] h-[250px] m-auto ">
             </div>
             <div class="w-[50%] flex justify-center items-center">
                 <div class="w-[100%]">
-                 <h3 class="text-2xl font-bold text-black ">{{book.title}}</h3>
-                 <h3 class="text-2xl font-bold text-black ">Author: {{book.author}}</h3>
-                 <p class="mt-2 text-sm text-black">Handpicked books for you.</p>
-                 <h1>total_borrowed_time: {{  book.total_borrowed_time }}</h1>
+                 <h3 class="text-[1.5rem] font-bold text-black ">{{book.title}}</h3>
+                 <h3 class="text-[1.2rem] font-bold text-black ">Author: {{book.author}}</h3>
+                 <p class="mt-2 text-[1.2rem] font-bold text-black">Handpicked books for you.</p>
+                 <h1 class="mt-2 text-[1.2rem] font-bold text-2xl text-black">Total Borrowed Time: {{  book.total_borrowed_time }}</h1>
+                 <a href="{% url 'specific_book' book.id %}" class="btn btn-warning">View More</a>
                 </div>
             </div>
-        </div>
-        
-        
+        </div> 
       </div>
        {% endfor %}
       
@@ -38,13 +37,13 @@
     </button>
 
     <!-- Indicators -->
-    <div id="indicators" class="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
-      <button class="indicator w-3 h-3 rounded-full bg-white/80 ring-2 ring-white/60"></button>
-      <button class="indicator w-3 h-3 rounded-full bg-white/40 hover:bg-white/80"></button>
-      <button class="indicator w-3 h-3 rounded-full bg-white/40 hover:bg-white/80"></button>
-    </div>
+
+  </div>
+  <div id="carousel" class="relative overflow-hidden rounded-lg w-[30%] bg-sky-500">
+     <h1 class="text-center mx-auto font-bold">Most Popular Book</h1>
   </div>
 </div>
+
 
 <script>
 (function(){

@@ -15,10 +15,10 @@ import requests
 
 load_dotenv()
 # Create your views here.
-Store_ID=os.getenv('Store_ID')
-Store_Password=os.getenv('Store_Password')
-issandbox=os.getenv('issandbox')
-SSLZ_URL=os.getenv('SSLZ_URL')
+# Store_ID=os.getenv('Store_ID')
+# Store_Password=os.getenv('Store_Password')
+# issandbox=os.getenv('issandbox')
+# SSLZ_URL=os.getenv('SSLZ_URL')
 
 
 class SignUpView(generic.FormView):
@@ -100,34 +100,38 @@ def depositView(request):
                if form.is_valid():
                   balance=form.cleaned_data['balance']
                   user=UserModel.objects.get(user=request.user)
-                  payload = {
-                    "store_id": Store_ID,
-                    "store_passwd": Store_Password,
-                    "total_amount": balance,
-                    "currency": "BDT",
-                    "tran_id": f"TXN{request.user.id}{TransactionModel.objects.count()}",
-                    "success_url": request.build_absolute_uri("payment/success/"),
-                    "fail_url": request.build_absolute_uri("payment/fail/"),
-                    "cancel_url": request.build_absolute_uri("payment/cancel/"),
-                    "cus_name": request.user.username,
-                    "cus_email": request.user.email,
-                    "cus_add1": "Dhaka",
-                    "cus_city": "Dhaka",  
-                    "cus_country": "Bangladesh",
-                    "cus_phone": user.contact_no,
-                    "shipping_method": "NO",
-                    "product_name": "Wallet Deposit",
-                    "product_category": "Deposit",
-                    "product_profile": "general",
-                }
-                  response = requests.post(SSLZ_URL, data=payload)
-                  data = response.json()
-                  print(data)
-                  if data.get("status") == "SUCCESS":
-                    TransactionModel.objects.create(user=request.user,amount=balance,transaction_type="Credit",payment_status="Pending",reference=payload["tran_id"])
-                    return redirect(data["GatewayPageURL"])
-                  
-                  else:
+                  user.balance+=balance
+                  user.save()
+                  TransactionModel.objects.create(user=request.user,amount=balance,transaction_type="Credit",payment_status="Pending",reference=f"TXN{request.user.id}{TransactionModel.objects.count()}")
+
+               #    payload = {
+               #      "store_id": Store_ID,
+               #      "store_passwd": Store_Password,
+               #      "total_amount": balance,
+               #      "currency": "BDT",
+               #      "tran_id": f"TXN{request.user.id}{TransactionModel.objects.count()}",
+               #      "success_url": request.build_absolute_uri("payment/success/"),
+               #      "fail_url": request.build_absolute_uri("payment/fail/"),
+               #      "cancel_url": request.build_absolute_uri("payment/cancel/"),
+               #      "cus_name": request.user.username,
+               #      "cus_email": request.user.email,
+               #      "cus_add1": "Dhaka",
+               #      "cus_city": "Dhaka",  
+               #      "cus_country": "Bangladesh",
+               #      "cus_phone": user.contact_no,
+               #      "shipping_method": "NO",
+               #      "product_name": "Wallet Deposit",
+               #      "product_category": "Deposit",
+               #      "product_profile": "general",
+               #  }
+               #    response = requests.post(SSLZ_URL, data=payload)
+               #    data = response.json()
+               #    print(data)
+               #    if data.get("status") == "SUCCESS":
+               #      TransactionModel.objects.create(user=request.user,amount=balance,transaction_type="Credit",payment_status="Pending",reference=payload["tran_id"])
+               #      return redirect(data["GatewayPageURL"])
+                  return redirect('home')
+               else:
                     return render(request, "deposit_form.html", {"form": form, "error": "SSL Init Failed"})
           return render(request,'deposit_form.html',{'form':DepositForm()})
      else:
@@ -136,34 +140,34 @@ def depositView(request):
 
 
 
-@csrf_exempt
-def payment_success(request):
-    amount = request.POST.get("amount")
-    tran_id = request.POST.get("tran_id") 
-    transaction=TransactionModel.objects.get(reference=tran_id)
-    user=UserModel.objects.get(user=transaction.user)
-    user.balance+=int(amount.split(".")[0])
-    user.save()
-    transaction.payment_status="Successful"
-    transaction.save()
+# @csrf_exempt
+# def payment_success(request):
+#     amount = request.POST.get("amount")
+#     tran_id = request.POST.get("tran_id") 
+#     transaction=TransactionModel.objects.get(reference=tran_id)
+#     user=UserModel.objects.get(user=transaction.user)
+#     user.balance+=int(amount.split(".")[0])
+#     user.save()
+#     transaction.payment_status="Successful"
+#     transaction.save()
 
-    return redirect('transaction_history')
+#     return redirect('transaction_history')
 
-@csrf_exempt
-def payment_fail(request):
-    amount = request.POST.get("amount")
-    tran_id = request.POST.get("tran_id") 
-    transaction=TransactionModel.objects.get(reference=tran_id)
-    transaction.payment_status="Failed"
-    transaction.save()
-    return redirect('transaction_history')
+# @csrf_exempt
+# def payment_fail(request):
+#     amount = request.POST.get("amount")
+#     tran_id = request.POST.get("tran_id") 
+#     transaction=TransactionModel.objects.get(reference=tran_id)
+#     transaction.payment_status="Failed"
+#     transaction.save()
+#     return redirect('transaction_history')
 
-@csrf_exempt
-def payment_cancel(request):
-    amount = request.POST.get("amount")
-    tran_id = request.POST.get("tran_id") 
-    transaction=TransactionModel.objects.get(reference=tran_id)
-    transaction.payment_status="Cancelled"
-    transaction.save()
-    return redirect('transaction_history')
+# @csrf_exempt
+# def payment_cancel(request):
+#     amount = request.POST.get("amount")
+#     tran_id = request.POST.get("tran_id") 
+#     transaction=TransactionModel.objects.get(reference=tran_id)
+#     transaction.payment_status="Cancelled"
+#     transaction.save()
+#     return redirect('transaction_history')
 
