@@ -7,7 +7,8 @@
    <thead>
      <tr class="text-[1.5rem] text-black">
        <th>Borrow Id</th>
-       <th>Book</th>
+       <th></th>
+       <th>Book Title</th>
        <th>Borrow Date</th>
        <th>Return Date</th>
        <th>Action</th>
@@ -17,13 +18,14 @@
    {% for r in b %}
    <tr>
        <td ><h1>{{r.id}}</h1></td>
+       <td><img src="{{ r.book.book_image.url }}" alt="Book Image" class=""></td>
        <td ><h1 class="text-wrap font-bold text-[1rem]">{{r.book.title}}</h1></td>
        <td ><h1 class="text-wrap font-bold text-[1rem]">{{r.borrow_date}}</h1></td>
        <td > <h1 class="text-wrap font-bold text-[1rem]">{{r.return_date}}</h1></td>
        {% if r.return_status != "Not" %}
-       <td class="flex justify-center "> <h1 class="bg-lime-400 border border-solid border-lime-400 p-[15px] rounded-lg">All Ready Returned</h1></td>
+       <td class="flex justify-center items-center"> <h1 class="bg-lime-400 font-bold border border-solid border-lime-400 p-[15px] rounded-lg  my-[50%]">Returned</h1></td>
        {%else %}
-       <td class="flex justify-center "><a class="btn btn-error p-[15px] rounded-lg">Return Now</a></td>
+       <td class="flex justify-center items-center"><a href="{% url 'return_book' r.book.id r.id %}" class="btn font-bold btn-error p-[15px] rounded-lg my-[50%]">Return Now</a></td>
        {%endif%}
    </tr>
    {% endfor %}
@@ -31,9 +33,11 @@
    <tfoot>
      <tr class="text-[1.5rem] text-black">
        <th>Borrow Id</th>
+       <th></th>
        <th>Book</th>
        <th>Borrow date</th>
        <th>Return date</th>
+       <th>Action</th>
      </tr>
    </tfoot>
  </table>
