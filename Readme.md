@@ -74,13 +74,13 @@ git reset --hard HEAD~1
 
 |Code Part|Status|
 |----------|----|
-|borrow_records.urls|X|
-|borrow_records.models|X|
-|borrow_records.admin|X|
+|borrow_records.urls|done|
+|borrow_records.models|done|
+|borrow_records.admin|done|
 |books.forms|NA|
-|books.views|X|
-|books.urls|X|
-|books.templates.books.html|X|
+|books.views|done|
+|books.urls|done|
+|books.templates.books.html|done|
 
 
 ### 14
