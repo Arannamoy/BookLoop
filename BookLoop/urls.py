@@ -24,6 +24,8 @@ urlpatterns = [
     path('',homeView,name='home'),
     path('user/',include('users.urls')),
     path('transaction/',include('transactions.urls')),
-    path('br/',include('borrow_records.urls'))
+    path('br/',include('borrow_records.urls')),
+    path('book/',include('books.urls'))
+
 ]
 urlpatterns += static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
