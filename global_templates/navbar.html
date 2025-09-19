@@ -23,7 +23,7 @@
     <div class="flex gap-[5px]">
     {% if user.is_authenticated %}
     
-    <a class="btn btn-warning text-[1.5rem]">Balance: {{ user.user_acc.balance }}</a>
+    <a class="btn btn-warning text-[1.5rem]">Balance: {{ user.user_acc.balance }} BDT</a>
     <a class="btn btn-error text-[1.5rem]" href="{% url 'logout' %}">Log Out</a>
     {% else %}
     <a class="btn btn-warning text-[1.25rem]" href="{% url 'signup' %}">Sign Up</a>
