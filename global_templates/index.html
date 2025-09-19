@@ -4,5 +4,6 @@ BookLoop | Home
 {% endblock%}
 
 {% block content %}
-<h1>Hello World</h1>
+{% include 'carousel.html' with books=books %}
+
 {% endblock%}

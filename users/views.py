@@ -167,4 +167,3 @@ def payment_cancel(request):
     transaction.save()
     return redirect('transaction_history')
 
-
