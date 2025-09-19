@@ -1,7 +1,7 @@
 from django.shortcuts import render,redirect
 from .models import Book as BookModel
 from borrow_records.models import Borrow_record as Borrow_recordModel
-from datetime import datetime
+import datetime
 
 # Create your views here.
 # def getAllBook(r):
@@ -18,8 +18,8 @@ def getSpecificBook(r,id):
 def borrowBook(r,id):
     if r.user.is_authenticated:
         book=BookModel.objects.get(pk=id)
-        Borrow_recordModel.objects.create(user=r.user,book=book,borrow_date=datetime.now())
+        Borrow_recordModel.objects.create(user=r.user,book=book,borrow_date=datetime.datetime.now(),return_date=datetime.datetime.now() + datetime.timedelta(days=7),return_status="Not")
         print(book)
-        return redirect('read')
+        return redirect('borrow_history')
     else:
-        return redirect('home')
+        return redirect('login')

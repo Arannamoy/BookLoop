@@ -24,7 +24,7 @@ urlpatterns = [
     path('',homeView,name='home'),
     path('user/',include('users.urls')),
     path('transaction/',include('transactions.urls')),
-    path('br/',include('borrow_records.urls')),
+    path('borrow/',include('borrow_records.urls')),
     path('book/',include('books.urls'))
 
 ]

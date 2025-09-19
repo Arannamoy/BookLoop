@@ -60,7 +60,7 @@
     <ul class="menu menu-horizontal px-1 flex gap-[5px]">
       {% if user.is_authenticated %}
       <li><a href="{% url 'update-profile' %}" class="text-[1.25rem]  btn btn-outline  my-[10px] font-bold">Profile</a></li>
-      <li><a class="btn btn-outline text-[1.25rem] my-[10px]" href="{% url 'read' %}">Borrow History</a></li>
+      <li><a class="btn btn-outline text-[1.25rem] my-[10px]" href="{% url 'borrow_history' %}">Borrow History</a></li>
       <li><a class="btn btn-outline text-[1.25rem] my-[10px]" href="{% url 'deposit' %}">Deposit</a></li>
       <li><a class="btn btn-outline text-[1.25rem] my-[10px]" href="{% url 'transaction_history' %}">Transaction History</a></li>
       {% endif %}
