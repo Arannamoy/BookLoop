@@ -18,7 +18,8 @@ def getSpecificBook(r,id):
 def borrowBook(r,id):
     if r.user.is_authenticated:
         book=BookModel.objects.get(pk=id)
-        Borrow_recordModel.objects.create(user=r.user,book=book,borrow_date=datetime())
-        return render('borrow_record')
+        Borrow_recordModel.objects.create(user=r.user,book=book,borrow_date=datetime.now())
+        print(book)
+        return redirect('read')
     else:
         return redirect('home')
