@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block title %}
+BookLoop | Home
+{% endblock %}
+
+{% block content %}
+<div class="w-[80%] mx-auto py-[50px]">
+    {% if books.count > 0 %}
+    {% for book in books %}
+    <div class="card bg-base-100 w-96 shadow-sm">
+    <figure>
+        <img
+        src="{{ book.book_image.url}}"
+        alt="Shoes" />
+    </figure>
+    <div class="card-body">
+        <h2 class="card-title">{{book.book_name}}</h2>
+        <p>{{book.author}}</p>
+        <div class="card-actions justify-between flex">
+        <button class="btn btn-warning"><a href="{% url 'specific_book' book.id %}">View More</a></button>
+        {% if book.quantity > 0 %}
+        <button class="btn btn-primary">Borrow Now</button>
+        {%else%}
+        <button class="btn btn-error">Out of stock</button>
+        {% endif %}
+        </div>
+    </div>
+    </div>
+    {% endfor %}
+    {% else %}
+    <h1 class="text-center font-bold text-red-600 text-[2.5rem]">No Book Found</h1>
+    {% endif %}
+</div>
+{% endblock %}
