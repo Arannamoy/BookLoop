@@ -5,7 +5,7 @@ from books.models import Book as BookModel
 # Create your models here.
 class Borrow_record(models.Model):
     user = models.ForeignKey (User,related_name="user_borrow_record",on_delete=models.CASCADE)
-    book = models.ManyToManyField (BookModel,null=True)
+    book = models.OneToOneField(BookModel,on_delete=models.CASCADE)
     borrow_date=models.DateTimeField(null=True)
     return_date =models.DateTimeField(null=True)
     created_at =models.DateTimeField(auto_now=True,null=True)
