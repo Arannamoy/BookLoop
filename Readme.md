@@ -87,7 +87,7 @@ git reset --hard HEAD~1
 
 |Code Part|Status|
 |----------|----|
-|borrow_records.templates|X|
+|borrow_records.templates|Done|
 |categorys.views|X|
 
 
