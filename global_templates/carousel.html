@@ -1,138 +1,156 @@
-{% load static %}
-<link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.3.3/dist/tailwind.min.css" rel="stylesheet">
-
-<div class="w-[100%] mx-auto py-8 flex flex-wrap justify-center items-center gap-[10px]">
-  <div id="carousel" class="relative overflow-hidden rounded-lg w-[60%]">
-    <!-- Slides wrapper -->
+<div id="book-carousel" class="w-full rounded-lg overflow-hidden shadow-lg relative">
     <div class="relative w-full h-64 md:h-96">
-      <!-- Slide 1 -->
-       
-       {% for book in books %}
-       <div class="carousel-slide absolute inset-0 transition-transform duration-700 ease-in-out transform translate-x-0 bg-sky-500 flex flex-wrap justify-between lg:flex-row flex-col items-center">
-        <div class="flex flex-wrap justify-between lg:flex-row flex-col items-center">
-            <div class="w-[50%] flex justify-center items-center">
-            <img src="{{ book.book_image.url }}" alt="Slide 1" class="w-[250px] h-[250px] m-auto ">
-            </div>
-            <div class="w-[50%] flex justify-center items-center">
-                <div class="w-[100%]">
-                 <h3 class="text-[1.5rem] font-bold text-black ">{{book.title}}</h3>
-                 <h3 class="text-[1.2rem] font-bold text-black ">Author: {{book.author}}</h3>
-                 <p class="mt-2 text-[1.2rem] font-bold text-black">Handpicked books for you.</p>
-                 <h1 class="mt-2 text-[1.2rem] font-bold text-2xl text-black">Total Borrowed Time: {{  book.total_borrowed_time }}</h1>
-                 <a href="{% url 'specific_book' book.id %}" class="btn btn-warning">View More</a>
+        {% for book in books %}
+        <div class="carousel-slide absolute inset-0 transition-all duration-700 transform translate-x-0 opacity-0 bg-gradient-to-r from-blue-500 to-indigo-600 dark:from-indigo-700 dark:to-purple-800 rounded-lg">
+            <div class="flex flex-col lg:flex-row items-center h-full">
+                <div class="w-full lg:w-1/2 p-4 flex justify-center">
+                    <img src="{{ book.book_image.url }}" alt="{{ book.title }}" class="w-48 h-48 md:w-64 md:h-64 object-cover rounded-lg shadow-lg transform transition-transform duration-300 hover:scale-105">
+                </div>
+                <div class="w-full lg:w-1/2 p-4 flex flex-col justify-center">
+                    <h3 class="text-xl md:text-2xl font-bold text-white">{{ book.title }}</h3>
+                    <h4 class="text-lg font-semibold text-white mt-1">Author: {{ book.author }}</h4>
+                    <p class="mt-2 text-white opacity-90">Handpicked books for you.</p>
+                    <p class="mt-2 text-white font-semibold">Total Borrowed Time: {{ book.total_borrowed_time }}</p>
+                    <div class="mt-4">
+                        <a href="{% url 'specific_book' book.id %}" class="btn glass text-white hover:bg-white/30 border-white">View Details</a>
+                    </div>
                 </div>
             </div>
-        </div> 
-      </div>
-       {% endfor %}
-      
+        </div>
+        {% endfor %}
     </div>
 
-    <!-- Controls -->
-    <button id="prevBtn" class="absolute left-3 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white p-2 rounded-full shadow">
-      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-800" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+    <!-- Carousel Controls -->
+    <button id="prevBtn" class="absolute left-3 top-1/2 -translate-y-1/2 bg-white/70 dark:bg-gray-800/70 hover:bg-white dark:hover:bg-gray-800 p-2 rounded-full shadow transition-all duration-300 transform hover:scale-110">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-800 dark:text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+        </svg>
     </button>
-    <button id="nextBtn" class="absolute right-3 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white p-2 rounded-full shadow">
-      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-800" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+    <button id="nextBtn" class="absolute right-3 top-1/2 -translate-y-1/2 bg-white/70 dark:bg-gray-800/70 hover:bg-white dark:hover:bg-gray-800 p-2 rounded-full shadow transition-all duration-300 transform hover:scale-110">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-800 dark:text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+        </svg>
     </button>
-
+    
     <!-- Indicators -->
-
-  </div>
-  <div id="carousel" class="relative overflow-hidden rounded-lg w-[30%] bg-sky-500">
-     <h1 class="text-center mx-auto font-bold">Most Popular Book</h1>
-  </div>
+    <div class="absolute bottom-4 left-0 right-0 flex justify-center space-x-2">
+        {% for book in books %}
+            <button class="carousel-indicator h-2 w-8 rounded-full bg-white/50 hover:bg-white/80 transition-all duration-300" data-index="{{ forloop.counter0 }}"></button>
+        {% endfor %}
+    </div>
 </div>
 
-
 <script>
-(function(){
-  const carousel = document.getElementById('carousel');
-  const slides = Array.from(carousel.querySelectorAll('.carousel-slide'));
-  const prevBtn = document.getElementById('prevBtn');
-  const nextBtn = document.getElementById('nextBtn');
-  const indicators = Array.from(document.querySelectorAll('#indicators .indicator'));
+    document.addEventListener('DOMContentLoaded', function() {
+        const carousel = document.getElementById('book-carousel');
+        if (!carousel) return;
+        
+        const slides = Array.from(carousel.querySelectorAll('.carousel-slide'));
+        const indicators = Array.from(carousel.querySelectorAll('.carousel-indicator'));
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        
+        if (slides.length === 0) return;
 
-  let current = 0;
-  let autoplay = true;
-  const AUTOPLAY_DELAY = 1000;
-  let timer = null;
+        let current = 0;
+        let autoplay = true;
+        const AUTOPLAY_DELAY = 4000;
+        let timer = null;
 
-  function goTo(index) {
-    index = (index + slides.length) % slides.length;
-    slides.forEach((s, i) => {
-      s.classList.remove('translate-x-0','translate-x-full','-translate-x-full');
-      if (i === index) s.classList.add('translate-x-0');
-      else if (i < index) s.classList.add('-translate-x-full');
-      else s.classList.add('translate-x-full');
+        function goTo(index) {
+            index = (index + slides.length) % slides.length;
+            
+            // Update slides
+            slides.forEach((slide, i) => {
+                if (i === index) {
+                    slide.classList.remove('-translate-x-full', 'translate-x-full', 'opacity-0');
+                    slide.classList.add('translate-x-0', 'opacity-100', 'z-10');
+                } else if (i < index) {
+                    slide.classList.remove('translate-x-0', 'translate-x-full', 'opacity-100', 'z-10');
+                    slide.classList.add('-translate-x-full', 'opacity-0', 'z-0');
+                } else {
+                    slide.classList.remove('translate-x-0', '-translate-x-full', 'opacity-100', 'z-10');
+                    slide.classList.add('translate-x-full', 'opacity-0', 'z-0');
+                }
+            });
+            
+            // Update indicators
+            indicators.forEach((indicator, i) => {
+                if (i === index) {
+                    indicator.classList.add('bg-white', 'w-12');
+                    indicator.classList.remove('bg-white/50', 'w-8');
+                } else {
+                    indicator.classList.remove('bg-white', 'w-12');
+                    indicator.classList.add('bg-white/50', 'w-8');
+                }
+            });
+            
+            current = index;
+        }
+
+        function next() { goTo(current + 1); }
+        function prev() { goTo(current - 1); }
+
+        // Controls
+        if (prevBtn) prevBtn.addEventListener('click', () => { prev(); resetTimer(); });
+        if (nextBtn) nextBtn.addEventListener('click', () => { next(); resetTimer(); });
+        
+        // Indicator controls
+        indicators.forEach((indicator, i) => {
+            indicator.addEventListener('click', () => {
+                goTo(i);
+                resetTimer();
+            });
+        });
+
+        // Autoplay
+        function startTimer() {
+            if (autoplay) timer = setInterval(next, AUTOPLAY_DELAY);
+        }
+
+        function stopTimer() {
+            if (timer) { clearInterval(timer); timer = null; }
+        }
+
+        function resetTimer() {
+            stopTimer();
+            startTimer();
+        }
+
+        // Pause on hover
+        carousel.addEventListener('mouseenter', stopTimer);
+        carousel.addEventListener('mouseleave', startTimer);
+
+        // Touch support
+        let startX = 0, deltaX = 0;
+        carousel.addEventListener('touchstart', (e) => {
+            stopTimer();
+            startX = e.touches[0].clientX;
+            deltaX = 0;
+        }, { passive: true });
+
+        carousel.addEventListener('touchmove', (e) => {
+            deltaX = e.touches[0].clientX - startX;
+        }, { passive: true });
+
+        carousel.addEventListener('touchend', () => {
+            const threshold = 50;
+            if (deltaX > threshold) prev();
+            else if (deltaX < -threshold) next();
+            resetTimer();
+        });
+
+        // Initialize
+        goTo(0);
+        startTimer();
+        
+        // Set first slide and indicator to active state
+        if (slides.length > 0) {
+            slides[0].classList.add('opacity-100', 'z-10');
+        }
+        if (indicators.length > 0) {
+            indicators[0].classList.add('bg-white', 'w-12');
+            indicators[0].classList.remove('bg-white/50');
+        }
     });
-    indicators.forEach((dot, i) => {
-      if (i === index) {
-        dot.classList.remove('bg-white/40');
-        dot.classList.add('bg-white/80');
-      } else {
-        dot.classList.remove('bg-white/80');
-        dot.classList.add('bg-white/40');
-      }
-    });
-    current = index;
-  }
-
-  function next() { goTo(current + 1); }
-  function prev() { goTo(current - 1); }
-
-  // attach controls
-  nextBtn.addEventListener('click', () => { next(); resetTimer(); });
-  prevBtn.addEventListener('click', () => { prev(); resetTimer(); });
-
-  // indicators click
-  indicators.forEach((dot, i) => {
-    dot.addEventListener('click', () => { goTo(i); resetTimer(); });
-  });
-
-  // autoplay
-  function startTimer() {
-    if (autoplay) timer = setInterval(next, AUTOPLAY_DELAY);
-  }
-  function stopTimer() {
-    if (timer) { clearInterval(timer); timer = null; }
-  }
-  function resetTimer() {
-    stopTimer();
-    startTimer();
-  }
-
-  // pause on hover/focus
-  carousel.addEventListener('mouseenter', () => { stopTimer(); });
-  carousel.addEventListener('mouseleave', () => { startTimer(); });
-  carousel.addEventListener('focusin', () => { stopTimer(); });
-  carousel.addEventListener('focusout', () => { startTimer(); });
-
-  // touch / swipe support
-  let startX = 0, deltaX = 0;
-  carousel.addEventListener('touchstart', (e) => {
-    stopTimer();
-    startX = e.touches[0].clientX;
-    deltaX = 0;
-  }, {passive: true});
-  carousel.addEventListener('touchmove', (e) => {
-    deltaX = e.touches[0].clientX - startX;
-  }, {passive: true});
-  carousel.addEventListener('touchend', () => {
-    const threshold = 50;
-    if (deltaX > threshold) prev();
-    else if (deltaX < -threshold) next();
-    resetTimer();
-  });
-
-  // init
-  goTo(0);
-  startTimer();
-
-  // expose goTo in case you want control from outside
-  window.carouselGoTo = goTo;
-})();
 </script>
-
-
-
