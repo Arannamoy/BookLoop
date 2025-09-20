@@ -3,7 +3,7 @@ from .models import Book as BookModel
 from borrow_records.models import Borrow_record as BorrowRecordModel
 from users.models import User as UserModel
 from transactions.models import Transaction as TransactionModel
-from categorys.models import Category as CategoryModel
+from categories.models import Category as CategoryModel
 import datetime
 
 # Create your views here.
