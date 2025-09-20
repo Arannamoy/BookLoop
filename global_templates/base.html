@@ -1,26 +1,57 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- DaisyUI & Tailwind -->
     <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.23/dist/full.min.css" rel="stylesheet" type="text/css" />
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Cedarville+Cursive&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700;900&display=swap" rel="stylesheet">
+
     <link rel="stylesheet" href="{% static 'style.css' %}">
     <title>{% block title %}{% endblock %}</title>
+
+    <script>
+        tailwind.config = {
+            plugins: [daisyui],
+            daisyui: {
+                themes: ["light"],
+            },
+        };
+    </script>
+
+    <style>
+    html, body {
+        margin: 0;
+        height: 100%;
+        background: linear-gradient(-45deg, #0d1b2a, #1b263b, #415a77, #a8dadc, #f1faee);
+        background-size: 400% 400%;
+        animation: skyShift 30s ease infinite;
+    }
+
+    @keyframes rainbow {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+    }
+</style>
 </head>
-<body class="google-sans-code bg-sky-100">
+
+<body>
     {% include 'navbar.html' %}
-    <div>
+    
+    <main class="min-h-screen">
         {% block content %}
         {% endblock %}
-    </div>
-    <footer class="mt-[2660px]">
-        {% include 'footer.html' %}
-    </footer>
+    </main>
+
+    {% include 'footer.html' %}
 </body>
+
 </html>

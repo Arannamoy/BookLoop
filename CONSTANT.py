@@ -1,6 +1,6 @@
 GENDER=(("Male","Male"),("Female","Female"))
 USER_TYPE=(("ADMIN","ADMIN"),("USER","USER"))
 TRANSACTION_TYPE=(("Debit","Debit"),("Credit","Credit"),("Penalty","Penalty"))
-PAYMENT_STATUS=(("Pending","Pending"),("Successful","Successful"),("Cancelled","Cancelled"),("Failed","Failed"))
+PAYMENT_STATUS=(("Pending","Pending"),("Success","Success"),("Cancelled","Cancelled"),("Failed","Failed"))
 RATING=(("⭐⭐⭐⭐⭐","⭐⭐⭐⭐⭐"),("⭐⭐⭐⭐","⭐⭐⭐⭐"),("⭐⭐⭐","⭐⭐⭐"),("⭐⭐","⭐⭐"),("⭐","⭐"))
 RETURN_STATUS=(("Returned","Returned"),("Not","Not"))

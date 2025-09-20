@@ -33,6 +33,7 @@ class SignUpForm(UserCreationForm):
             'text-gray-700 border border-gray-200 rounded '
             'py-3 px-4 leading-tight focus:outline-none '
             'focus:bg-white focus:border-gray-500'
+            "hover:bg-white dark:bg-white dark:text-black"
             )})
         
         self.fields['first_name'].widget.attrs.update({'class': (
@@ -40,31 +41,40 @@ class SignUpForm(UserCreationForm):
             'text-gray-700 border border-gray-200 rounded '
             'py-3 px-4 leading-tight focus:outline-none '
             'focus:bg-white focus:border-gray-500'
+            "hover:bg-white dark:bg-white dark:text-black"
         )})
 
         self.fields['last_name'].widget.attrs.update({'class': (
             'appearance-none block w-full bg-gray-200 '
             'text-gray-700 border border-gray-200 rounded '
             'py-3 px-4 leading-tight focus:outline-none '
-            'focus:bg-white focus:border-gray-500')})
+            'focus:bg-white focus:border-gray-500'
+            "hover:bg-white dark:bg-white dark:text-black"
+            )})
         
         self.fields['email'].widget.attrs.update({'class': (
             'appearance-none block w-full bg-gray-200 '
             'text-gray-700 border border-gray-200 rounded '
             'py-3 px-4 leading-tight focus:outline-none '
-            'focus:bg-white focus:border-gray-500')})
+            'focus:bg-white focus:border-gray-500'
+            "hover:bg-white dark:bg-white dark:text-black"
+            )})
         
         self.fields['password1'].widget.attrs.update({'class': (
             'appearance-none block w-full bg-gray-200 '
             'text-gray-700 border border-gray-200 rounded '
             'py-3 px-4 leading-tight focus:outline-none '
-            'focus:bg-white focus:border-gray-500')})
+            'focus:bg-white focus:border-gray-500'
+            "hover:bg-white dark:bg-white dark:text-black"
+            )})
         
         self.fields['password2'].widget.attrs.update({'class': (
             'appearance-none block w-full bg-gray-200 '
             'text-gray-700 border border-gray-200 rounded '
             'py-3 px-4 leading-tight focus:outline-none '
-            'focus:bg-white focus:border-gray-500')})
+            'focus:bg-white focus:border-gray-500'
+            "hover:bg-white dark:bg-white dark:text-black"
+            )})
         
         self.fields['dob'].widget=forms.DateInput(
         attrs=({
@@ -74,6 +84,7 @@ class SignUpForm(UserCreationForm):
         'text-gray-700 border border-gray-200 rounded '
         'py-3 px-4 leading-tight focus:outline-none '
         'focus:bg-white focus:border-gray-500'
+        "hover:bg-white dark:bg-white dark:text-black"
          )
          })
         )
@@ -85,6 +96,7 @@ class SignUpForm(UserCreationForm):
             'text-gray-700 border border-gray-200 rounded '
             'py-3 px-4 leading-tight focus:outline-none '
             'focus:bg-white focus:border-gray-500'
+            "hover:bg-white dark:bg-white dark:text-black"
             )})
         
         self.fields['contact_no'].widget=forms.DateInput(
@@ -95,6 +107,7 @@ class SignUpForm(UserCreationForm):
         'text-gray-700 border border-gray-200 rounded '
         'py-3 px-4 leading-tight focus:outline-none '
         'focus:bg-white focus:border-gray-500'
+        "hover:bg-white dark:bg-white dark:text-black"
          )
          })
         )
@@ -122,6 +135,7 @@ class UserUpdateForm(forms.ModelForm):
                     'text-gray-700 border border-gray-200 rounded '
                     'py-3 px-4 leading-tight focus:outline-none '
                     'focus:bg-white focus:border-gray-500'
+                    "hover:bg-white dark:bg-white dark:text-black"
                 )
             })
         # jodi user er account thake 
