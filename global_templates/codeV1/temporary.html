@@ -1,0 +1,255 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.23/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cedarville+Cursive&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <title>{% block title %}{% endblock %}</title>
+</head>
+
+<body class="google-sans-code">
+
+    <div class="navbar bg-black py-[25px] px-[25px]">
+        <div class="navbar-start">
+            <div class="dropdown">
+                <div tabindex="0" role="button" class="btn btn-ghost lg:hidden">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 6h16M4 12h8m-8 6h16" />
+                    </svg>
+                </div>
+                <ul tabindex="0" class="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
+                    <li><a class="btn btn-primary font-bold text-[2rem]" href="{% url 'signup' %}">Borrow Book</a></li>
+                    <li><a class="btn btn-primary font-bold text-[1.25rem] text-white">Review</a></li>
+                </ul>
+            </div>
+            <div class="navbar-start">
+
+            </div>
+        </div>
+        <div class="navbar-center hidden lg:flex">
+            <button><a class="font-bold" href="{% url 'home' %}"><sup><span
+                            class="text-[2.5rem]  text-white lato-black-italic font-bold">BookLoop</span></sup><sub
+                        class="cedarville-cursive-regular text-[1.5rem] text-white"><span>Borrow, Return, Pay
+                            back</span></sub></a></button>
+        </div>
+        <div class="navbar-end">
+            <div class="flex gap-[5px]">
+                {% if user.is_authenticated %}
+
+                <a class="btn btn-warning text-[1.5rem]">Balance: {{ user.user_acc.balance }} BDT</a>
+                <a class="btn btn-error text-[1.5rem]" href="{% url 'logout' %}">Log Out</a>
+                {% else %}
+                <a class="btn btn-warning text-[1.25rem]" href="{% url 'signup' %}">Sign Up</a>
+                <a class="btn btn-warning text-[1.25rem]" href="{% url 'login' %}">Log In</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+    <div class="navbar bg-base-100 shadow-sm">
+        <div class="navbar-start">
+            <div class="dropdown">
+                <div tabindex="0" role="button" class="btn btn-ghost lg:hidden">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 6h16M4 12h8m-8 6h16" />
+                    </svg>
+                </div>
+                <ul tabindex="0" class="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
+                    <li><a>Item 1</a></li>
+                    <li>
+                        <a>Parent</a>
+                    </li>
+                    <li><a>Item 3</a></li>
+                </ul>
+            </div>
+
+        </div>
+        <div class="navbar-center hidden lg:flex">
+            <ul class="menu menu-horizontal px-1 flex gap-[5px]">
+                <li><a href="{% url 'get-all-book' None %}"
+                        class="text-[1.25rem]  btn btn-outline  my-[10px] font-bold">Browse Books</a></li>
+                {% if user.is_authenticated %}
+                <li><a class="btn btn-outline text-[1.25rem] my-[10px]" href="{% url 'borrow_history' %}">Borrow
+                        History</a></li>
+                <li><a href="{% url 'update-profile' %}"
+                        class="text-[1.25rem]  btn btn-outline  my-[10px] font-bold">Profile</a></li>
+                <li><a class="btn btn-outline text-[1.25rem] my-[10px]" href="{% url 'deposit' %}">Deposit</a></li>
+                <li><a class="btn btn-outline text-[1.25rem] my-[10px]"
+                        href="{% url 'transaction_history' %}">Transaction History</a></li>
+                {% endif %}
+            </ul>
+        </div>
+        <div class="navbar-end">
+        </div>
+    </div>
+
+    {% load static %}
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.3.3/dist/tailwind.min.css" rel="stylesheet">
+
+<div class="w-[100%] mx-auto py-8 flex flex-wrap justify-center items-center gap-[10px]">
+  <div id="carousel" class="relative overflow-hidden rounded-lg w-[60%]">
+    <!-- Slides wrapper -->
+    <div class="relative w-full h-64 md:h-96">
+      <!-- Slide 1 -->
+       
+       {% for book in books %}
+       <div class="carousel-slide absolute inset-0 transition-transform duration-700 ease-in-out transform translate-x-0 bg-sky-500 flex flex-wrap justify-between lg:flex-row flex-col items-center">
+        <div class="flex flex-wrap justify-between lg:flex-row flex-col items-center">
+            <div class="w-[50%] flex justify-center items-center">
+            <img src="{{ book.book_image.url }}" alt="Slide 1" class="w-[250px] h-[250px] m-auto ">
+            </div>
+            <div class="w-[50%] flex justify-center items-center">
+                <div class="w-[100%]">
+                 <h3 class="text-[1.5rem] font-bold text-black ">{{book.title}}</h3>
+                 <h3 class="text-[1.2rem] font-bold text-black ">Author: {{book.author}}</h3>
+                 <p class="mt-2 text-[1.2rem] font-bold text-black">Handpicked books for you.</p>
+                 <h1 class="mt-2 text-[1.2rem] font-bold text-2xl text-black">Total Borrowed Time: {{  book.total_borrowed_time }}</h1>
+                 <a href="{% url 'specific_book' book.id %}" class="btn btn-warning">View More</a>
+                </div>
+            </div>
+        </div> 
+      </div>
+       {% endfor %}
+      
+    </div>
+
+    <!-- Controls -->
+    <button id="prevBtn" class="absolute left-3 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white p-2 rounded-full shadow">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-800" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+    </button>
+    <button id="nextBtn" class="absolute right-3 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white p-2 rounded-full shadow">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-800" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+    </button>
+
+    <!-- Indicators -->
+
+  </div>
+  <div id="carousel" class="relative overflow-hidden rounded-lg w-[30%] bg-sky-500">
+     <h1 class="text-center mx-auto font-bold">Most Popular Book</h1>
+  </div>
+</div>
+
+
+<script>
+(function(){
+  const carousel = document.getElementById('carousel');
+  const slides = Array.from(carousel.querySelectorAll('.carousel-slide'));
+  const prevBtn = document.getElementById('prevBtn');
+  const nextBtn = document.getElementById('nextBtn');
+  const indicators = Array.from(document.querySelectorAll('#indicators .indicator'));
+
+  let current = 0;
+  let autoplay = true;
+  const AUTOPLAY_DELAY = 1000;
+  let timer = null;
+
+  function goTo(index) {
+    index = (index + slides.length) % slides.length;
+    slides.forEach((s, i) => {
+      s.classList.remove('translate-x-0','translate-x-full','-translate-x-full');
+      if (i === index) s.classList.add('translate-x-0');
+      else if (i < index) s.classList.add('-translate-x-full');
+      else s.classList.add('translate-x-full');
+    });
+    indicators.forEach((dot, i) => {
+      if (i === index) {
+        dot.classList.remove('bg-white/40');
+        dot.classList.add('bg-white/80');
+      } else {
+        dot.classList.remove('bg-white/80');
+        dot.classList.add('bg-white/40');
+      }
+    });
+    current = index;
+  }
+
+  function next() { goTo(current + 1); }
+  function prev() { goTo(current - 1); }
+
+  // attach controls
+  nextBtn.addEventListener('click', () => { next(); resetTimer(); });
+  prevBtn.addEventListener('click', () => { prev(); resetTimer(); });
+
+  // indicators click
+  indicators.forEach((dot, i) => {
+    dot.addEventListener('click', () => { goTo(i); resetTimer(); });
+  });
+
+  // autoplay
+  function startTimer() {
+    if (autoplay) timer = setInterval(next, AUTOPLAY_DELAY);
+  }
+  function stopTimer() {
+    if (timer) { clearInterval(timer); timer = null; }
+  }
+  function resetTimer() {
+    stopTimer();
+    startTimer();
+  }
+
+  // pause on hover/focus
+  carousel.addEventListener('mouseenter', () => { stopTimer(); });
+  carousel.addEventListener('mouseleave', () => { startTimer(); });
+  carousel.addEventListener('focusin', () => { stopTimer(); });
+  carousel.addEventListener('focusout', () => { startTimer(); });
+
+  // touch / swipe support
+  let startX = 0, deltaX = 0;
+  carousel.addEventListener('touchstart', (e) => {
+    stopTimer();
+    startX = e.touches[0].clientX;
+    deltaX = 0;
+  }, {passive: true});
+  carousel.addEventListener('touchmove', (e) => {
+    deltaX = e.touches[0].clientX - startX;
+  }, {passive: true});
+  carousel.addEventListener('touchend', () => {
+    const threshold = 50;
+    if (deltaX > threshold) prev();
+    else if (deltaX < -threshold) next();
+    resetTimer();
+  });
+
+  // init
+  goTo(0);
+  startTimer();
+
+  // expose goTo in case you want control from outside
+  window.carouselGoTo = goTo;
+})();
+</script>
+
+
+
+
+
+
+    <div>
+        {% block content %}
+        {% endblock %}
+    </div>
+    <footer class="mt-[2660px]">
+        {% include 'footer.html' %}
+    </footer>
+</body>
+
+</html>
