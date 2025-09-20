@@ -19,8 +19,8 @@
             <p class="text-red-600 text-sm italic pb-2">{{ error }}</p>
             {% endfor %} {% endif %}
             <div class="flex w-full justify-center">
-                <button class="bg-blue-900 text-white hover:text-blue-900 hover:bg-white border border-blue-900 font-bold px-4 py-2 rounded-lg" type="submit">
-                Submit
+                <button class="rainbow-hover bg-blue-900 text-white hover:text-blue-900 hover:bg-white border border-blue-900 font-bold px-4 py-2 rounded-lg" type="submit">
+                Deposit
             </button>
             </div>
         </form>
@@ -28,3 +28,34 @@
     
 </div>
 {% endblock %}
+
+
+
+<style>
+  @keyframes rainbow {
+    0% {
+      background-position: 0% 50%;
+    }
+
+    50% {
+      background-position: 100% 50%;
+    }
+
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+
+  .rainbow-hover {
+    background: linear-gradient(270deg, #ff0080, #ff8c00, #40e0d0, #8a2be2, #ff0080);
+    background-size: 600% 600%;
+    color: white !important;
+    border: none !important;
+    transition: all 0.3s ease-in-out;
+  }
+
+  .rainbow-hover:hover {
+    animation: rainbow 5s ease infinite;
+    color: white !important;
+  }
+</style>
