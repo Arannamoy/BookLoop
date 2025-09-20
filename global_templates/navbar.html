@@ -1,56 +1,89 @@
-<!-- Top Navbar -->
-<div class="navbar bg-black py-4 px-6 shadow-md">
-  <div class="navbar-start">
-    <!-- Mobile dropdown -->
-    <div class="dropdown">
-      <div tabindex="0" role="button" class="btn btn-ghost lg:hidden">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-        </svg>
-      </div>
-      <ul tabindex="0" class="menu menu-sm dropdown-content bg-white rounded-lg mt-3 w-52 p-2 shadow-md">
-        <li><a class="btn btn-primary font-bold text-lg" href="{% url 'signup' %}">Borrow Book</a></li>
-        <li><a class="btn btn-secondary font-bold text-base text-white">Review</a></li>
-      </ul>
-    </div>
-  </div>
 
-  <!-- Center Logo -->
-  <div class="navbar-center hidden lg:flex">
-    <a href="{% url 'home' %}" class="flex flex-col items-center">
-      <span class="text-3xl text-white font-extrabold tracking-wide lato-black-italic">BookLoop</span>
-      <span class="text-lg text-white cedarville-cursive-regular">Borrow, Return, Pay back</span>
-    </a>
-  </div>
 
-  <!-- Right Side -->
-  <div class="navbar-end space-x-3">
-    {% if user.is_authenticated %}
-      <a class="btn btn-outline bg-white text-lg hover:btn-primary text-lg font-semibold flex items-center gap-2">
-        💰 Balance: {{ user.user_acc.balance }} BDT
-      </a>
-      <a class="btn btn-error text-lg font-semibold flex items-center gap-1" href="{% url 'logout' %}">
-        🚪 Log Out
-      </a>
-    {% else %}
-      <a class="btn btn-primary text-base font-semibold" href="{% url 'signup' %}">Sign Up</a>
-      <a class="btn btn-accent text-base font-semibold" href="{% url 'login' %}">Log In</a>
-    {% endif %}
-  </div>
-</div>
 
 
 <!-- Bottom Navbar -->
-<div class="navbar bg-white shadow-sm">
+<div class="navbar bg-white shadow-sm flex justify-center">
   <div class="navbar-center hidden lg:flex">
     <ul class="menu menu-horizontal px-1 flex gap-3">
-      <li><a href="{% url 'get-all-book' None %}" class="btn btn-outline text-lg font-bold hover:btn-primary">📚 Browse Books</a></li>
+      <li><a href="{% url 'get-all-book' None %}"
+          class=" rainbow-hover btn btn-outline text-lg hover:btn-primary hover:btn-primary bg-white text-black hover:text-white !dark:bg-white !dark:text-black">📚
+          Browse Books</a></li>
       {% if user.is_authenticated %}
-        <li><a href="{% url 'borrow_history' %}" class="btn btn-outline text-lg hover:btn-primary">📖 Borrow History</a></li>
-        <li><a href="{% url 'update-profile' %}" class="btn btn-outline text-lg font-bold hover:btn-primary">👤 Profile</a></li>
-        <li><a href="{% url 'deposit' %}" class="btn btn-outline text-lg hover:btn-primary">💳 Deposit</a></li>
-        <li><a href="{% url 'transaction_history' %}" class="btn btn-outline text-lg hover:btn-primary">📊 Transaction History</a></li>
+      <li><a href="{% url 'borrow_history' %}"
+          class="rainbow-hover btn btn-outline text-lg hover:btn-primary hover:btn-primary bg-white text-black hover:text-white !dark:bg-white !dark:text-black">📖
+          Borrow History</a></li>
+      <li><a 
+          class="rainbow-hover btn btn-outline text-lg hover:btn-primary hover:btn-primary bg-white text-black hover:text-white !dark:bg-white !dark:text-black">
+         📝 My Review</a></li>
+      <li><a href="{% url 'update-profile-fun' %}"
+          class="rainbow-hover btn btn-outline text-lg font-bold hover:btn-primary hover:btn-primary bg-white text-black hover:text-white !dark:bg-white !dark:text-black">👤
+          Profile</a></li>
+      <li><a href="{% url 'deposit' %}"
+          class="rainbow-hover btn btn-outline text-lg hover:btn-primary hover:btn-primary bg-white text-black hover:text-white !dark:bg-white !dark:text-black">💳
+          Deposit</a></li>
+      <li><a href="{% url 'transaction_history' %}"
+          class="rainbow-hover btn btn-outline text-lg hover:btn-primary hover:btn-primary bg-white text-black hover:text-white !dark:bg-white !dark:text-black">📊
+          Transaction History</a></li>
       {% endif %}
     </ul>
   </div>
 </div>
+
+
+<style>
+  @keyframes rainbow {
+    0% {
+      background-position: 0% 50%;
+    }
+
+    50% {
+      background-position: 100% 50%;
+    }
+
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+
+  .rainbow-hover {
+    background: linear-gradient(270deg, #ff0080, #ff8c00, #40e0d0, #8a2be2, #ff0080);
+    background-size: 600% 600%;
+    color: white !important;
+    border: none !important;
+    transition: all 0.3s ease-in-out;
+  }
+
+  .rainbow-hover:hover {
+    animation: rainbow 5s ease infinite;
+    color: white !important;
+  }
+
+
+
+  .ui_2 {
+        margin: 0;
+        background: linear-gradient(-247deg,
+            #000000,
+            #0a0a0a,
+            #1a1a2e,
+            #2e2e3e,
+            #3a3a4d,
+            #4b4b60,
+            #5c5c73,
+            #6e6e85,
+            #7f7f98,
+            #8f8fae
+        );
+        background-size: 400% 400%;
+        animation: darkSky 40s ease infinite;
+    }
+
+    @keyframes darkSky {
+        0% { background-position: 0% 50%; }
+        25% { background-position: 50% 100%; }
+        50% { background-position: 100% 50%; }
+        75% { background-position: 50% 0%; }
+        100% { background-position: 0% 50%; }
+    }
+</style>
