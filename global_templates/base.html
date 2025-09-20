@@ -1,6 +1,6 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,67 +8,19 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cedarville+Cursive&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'style.css' %}">
-    <link rel="icon" type="image/x-icon" href="{% static 'favicon.ico' %}">
-    <title>{% block title %}BookLoop - Your Digital Library{% endblock %}</title>
-    
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        'inter': ['Inter', 'sans-serif'],
-                        'playfair': ['Playfair Display', 'serif'],
-                    },
-                    colors: {
-                        'primary': '#3B82F6',
-                        'secondary': '#8B5CF6',
-                        'accent': '#F59E0B',
-                        'neutral': '#374151',
-                    }
-                }
-            }
-        }
-    </script>
+    <title>{% block title %}{% endblock %}</title>
 </head>
-<body class="font-inter bg-gradient-to-br from-blue-50 via-white to-purple-50 min-h-screen">
-    <!-- Navigation -->
+<body class="google-sans-code">
     {% include 'navbar.html' %}
-    
-    <!-- Main Content -->
-    <main class="min-h-screen">
+    <div>
         {% block content %}
         {% endblock %}
-    </main>
-    
-    <!-- Footer -->
-    {% include 'footer.html' %}
-    
-    <!-- Scroll to Top Button -->
-    <button id="scrollToTop" class="fixed bottom-8 right-8 bg-primary text-white p-3 rounded-full shadow-lg hover:bg-blue-600 transition-all duration-300 opacity-0 transform translate-y-4">
-        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
-        </svg>
-    </button>
-
-    <script>
-        // Scroll to top functionality
-        const scrollToTopBtn = document.getElementById('scrollToTop');
-        window.addEventListener('scroll', () => {
-            if (window.pageYOffset > 300) {
-                scrollToTopBtn.classList.remove('opacity-0', 'translate-y-4');
-                scrollToTopBtn.classList.add('opacity-100', 'translate-y-0');
-            } else {
-                scrollToTopBtn.classList.add('opacity-0', 'translate-y-4');
-                scrollToTopBtn.classList.remove('opacity-100', 'translate-y-0');
-            }
-        });
-        
-        scrollToTopBtn.addEventListener('click', () => {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        });
-    </script>
+    </div>
+    <footer class="mt-[2660px]">
+        {% include 'footer.html' %}
+    </footer>
 </body>
 </html>

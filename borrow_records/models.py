@@ -8,5 +8,6 @@ class Borrow_record(models.Model):
     book = models.ForeignKey(BookModel,on_delete=models.CASCADE)
     borrow_date=models.DateTimeField(null=True)
     return_status=models.CharField(choices=RETURN_STATUS,null=True)
-    return_date =models.DateTimeField(null=True)
+    due_date=models.DateTimeField(null=True)
+    return_date =models.DateTimeField(null=True,blank=True)
     created_at =models.DateTimeField(auto_now=True,null=True)
