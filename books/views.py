@@ -15,11 +15,9 @@ def getAllBook(r,slug=None):
     return render(r,"books.html",{"books":books,"categorys":CategoryModel.objects.all()})
 
 def getSpecificBook(r,id):
-    if r.user.is_authenticated:
         book=BookModel.objects.get(pk=id)
         return render(r,'book.html',{'book':book})
-    else:
-        return redirect('home')
+   
 
 def borrowBook(r,id):
     if r.user.is_authenticated:
