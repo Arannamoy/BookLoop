@@ -8,26 +8,26 @@
         tabindex="0"
         class="menu menu-sm dropdown-content bg-base-100 rounded-box z-1  mt- w-52 p-2 shadow">
         <li><a href="{% url 'get-all-book' None %}"
-          class=" rainbow-hover btn btn-outline text-lg mx-[10px] my-[10px] hover:btn-primary hover:btn-primary bg-white text-black hover:text-white !dark:bg-white !dark:text-black">📚
+          class=" rainbow-hover btn btn-outline text-[1rem] hover:text-[1.5rem] mx-[10px] my-[10px] hover:btn-primary hover:btn-primary bg-white text-black hover:text-white !dark:bg-white !dark:text-black">📚
           Browse Books</a></li>
       {% if user.is_authenticated %}
       <li><a href="{% url 'borrow_history' %}"
-          class="rainbow-hover btn btn-outline text-lg mx-[10px] my-[10px] hover:btn-primary hover:btn-primary bg-white text-black hover:text-white !dark:bg-white !dark:text-black">📖
+          class="rainbow-hover btn btn-outline text-[1rem] mx-[10px] my-[10px] hover:btn-primary hover:btn-primary bg-white text-black hover:text-white !dark:bg-white !dark:text-black">📖
           Borrow History</a></li>
       <li><a 
-          class="rainbow-hover btn btn-outline text-lg mx-[10px] my-[10px] hover:btn-primary hover:btn-primary bg-white text-black hover:text-white !dark:bg-white !dark:text-black">
+          class="rainbow-hover btn btn-outline text-[1rem] mx-[10px] my-[10px] hover:btn-primary hover:btn-primary bg-white text-black hover:text-white !dark:bg-white !dark:text-black">
          📝 My Review</a></li>
       <li><a href="{% url 'update-profile-fun' %}"
-          class="rainbow-hover btn btn-outline text-lg mx-[10px] my-[10px] font-bold hover:btn-primary hover:btn-primary bg-white text-black hover:text-white !dark:bg-white !dark:text-black">👤
+          class="rainbow-hover btn btn-outline text-[1rem] mx-[10px] my-[10px] font-bold hover:btn-primary hover:btn-primary bg-white text-black hover:text-white !dark:bg-white !dark:text-black">👤
           Profile</a></li>
       <li><a href="{% url 'deposit' %}"
-          class="rainbow-hover btn btn-outline text-lg mx-[10px] my-[10px] hover:btn-primary hover:btn-primary bg-white text-black hover:text-white !dark:bg-white !dark:text-black">💳
+          class="rainbow-hover btn btn-outline text-[1rem] mx-[10px] my-[10px] hover:btn-primary hover:btn-primary bg-white text-black hover:text-white !dark:bg-white !dark:text-black">💳
           Deposit</a></li>
       <li><a href="{% url 'transaction_history' %}"
-          class="rainbow-hover btn btn-outline text-lg mx-[10px] my-[10px] hover:btn-primary hover:btn-primary bg-white text-black hover:text-white !dark:bg-white !dark:text-black">📊
+          class="rainbow-hover btn btn-outline text-[1rem] mx-[10px] my-[10px] hover:btn-primary hover:btn-primary bg-white text-black hover:text-white !dark:bg-white !dark:text-black">📊
           Transaction History</a></li>
       <li><a 
-          class="rainbow-hover btn btn-outline text-lg mx-[10px] my-[10px] hover:btn-primary hover:btn-primary bg-white text-black hover:text-white !dark:bg-white !dark:text-black">
+          class="rainbow-hover btn btn-outline text-[1rem] mx-[10px] my-[10px] hover:btn-primary hover:btn-primary bg-white text-black hover:text-white !dark:bg-white !dark:text-black">
           💰 {{ user.user_acc.balance }} BDT</a></li>
       {% endif %}
       </ul>
@@ -37,39 +37,31 @@
   <div class="navbar-center hidden lg:flex">
     <!-- <ul class="menu menu-horizontal px-1"> -->
       <!-- <li><a>Item 1</a></li> -->
-      <!-- <li> -->
-        <!-- <details> -->
-          <!-- <summary>Parent</summary> -->
-          <!-- <ul class="p-2"> -->
-            <!-- <li><a>Submenu 1</a></li> -->
-            <!-- <li><a>Submenu 2</a></li> -->
-          <!-- </ul> -->
-        <!-- </details> -->
-      <!-- </li> -->
+      
       <!-- <li><a>Item 3</a></li> -->
     <!-- </ul> -->
      <ul class="menu menu-horizontal px-1 flex gap-3">
       <li><a href="{% url 'get-all-book' None %}"
-          class=" rainbow-hover btn btn-outline text-lg hover:btn-primary hover:btn-primary bg-white text-black hover:text-white !dark:bg-white !dark:text-black">📚
+          class=" rainbow-hover btn btn-outline text-[1rem] hover:btn-primary hover:btn-primary bg-white text-black hover:text-white !dark:bg-white !dark:text-black">📚
           Browse Books</a></li>
       {% if user.is_authenticated %}
       <li><a href="{% url 'borrow_history' %}"
-          class="rainbow-hover btn btn-outline text-lg hover:btn-primary hover:btn-primary bg-white text-black hover:text-white !dark:bg-white !dark:text-black">📖
+          class="rainbow-hover btn btn-outline text-[1rem] hover:btn-primary hover:btn-primary bg-white text-black hover:text-white !dark:bg-white !dark:text-black">📖
           Borrow History</a></li>
       <li><a 
-          class="rainbow-hover btn btn-outline text-lg hover:btn-primary hover:btn-primary bg-white text-black hover:text-white !dark:bg-white !dark:text-black">
+          class="rainbow-hover btn btn-outline text-[1rem] hover:btn-primary hover:btn-primary bg-white text-black hover:text-white !dark:bg-white !dark:text-black">
          📝 My Review</a></li>
       <li><a href="{% url 'update-profile-fun' %}"
-          class="rainbow-hover btn btn-outline text-lg font-bold hover:btn-primary hover:btn-primary bg-white text-black hover:text-white !dark:bg-white !dark:text-black">👤
+          class="rainbow-hover btn btn-outline text-[1rem] font-bold hover:btn-primary hover:btn-primary bg-white text-black hover:text-white !dark:bg-white !dark:text-black">👤
           Profile</a></li>
       <li><a href="{% url 'deposit' %}"
-          class="rainbow-hover btn btn-outline text-lg hover:btn-primary hover:btn-primary bg-white text-black hover:text-white !dark:bg-white !dark:text-black">💳
+          class="rainbow-hover btn btn-outline text-[1rem] hover:btn-primary hover:btn-primary bg-white text-black hover:text-white !dark:bg-white !dark:text-black">💳
           Deposit</a></li>
       <li><a href="{% url 'transaction_history' %}"
-          class="rainbow-hover btn btn-outline text-lg hover:btn-primary hover:btn-primary bg-white text-black hover:text-white !dark:bg-white !dark:text-black">📊
+          class="rainbow-hover btn btn-outline text-[1rem] hover:btn-primary hover:btn-primary bg-white text-black hover:text-white !dark:bg-white !dark:text-black">📊
           Transaction History</a></li>
       <li><a 
-          class="rainbow-hover btn btn-outline text-lg hover:btn-primary hover:btn-primary bg-white text-black hover:text-white !dark:bg-white !dark:text-black">
+          class="rainbow-hover btn btn-outline text-[1rem] hover:btn-primary hover:btn-primary bg-white text-black hover:text-white !dark:bg-white !dark:text-black">
           💰 {{ user.user_acc.balance}} BDT</a></li>
       {% endif %}
     </ul>
@@ -78,12 +70,14 @@
     {% if user.is_authenticated %}
     <ul>
       <li><a href="{% url 'logout' %}"
-          class="btn btn-outline btn-error text-lg hover:btn-error hover:btn-primary bg-white text-black hover:text-white !dark:bg-white !dark:text-black">Log Out</a></li>
+          class="btn btn-error text-[1rem] hover:btn-error hover:btn-primary text-black hover:text-white !dark:bg-white !dark:text-black">
+        Logout
+        </a></li>
     </ul>
     {% else %}
     <ul>
       <li><a href="{% url 'login' %}"
-          class="rainbow-hover btn btn-outline text-lg hover:btn-primary hover:btn-primary bg-white text-black hover:text-white !dark:bg-white !dark:text-black">📊
+          class="rainbow-hover btn btn-outline text-[1rem] hover:btn-primary hover:btn-primary bg-white text-black hover:text-white !dark:bg-white !dark:text-black">
           Login</a></li>
     </ul>
     {% endif %}
@@ -95,23 +89,23 @@
   <div class="navbar-center hidden lg:flex">
     <ul class="menu menu-horizontal px-1 flex gap-3">
       <li><a href="{% url 'get-all-book' None %}"
-          class=" rainbow-hover btn btn-outline text-lg hover:btn-primary hover:btn-primary bg-white text-black hover:text-white !dark:bg-white !dark:text-black">📚
+          class=" rainbow-hover btn btn-outline text-[1rem] hover:btn-primary hover:btn-primary bg-white text-black hover:text-white !dark:bg-white !dark:text-black">📚
           Browse Books</a></li>
       {% if user.is_authenticated %}
       <li><a href="{% url 'borrow_history' %}"
-          class="rainbow-hover btn btn-outline text-lg hover:btn-primary hover:btn-primary bg-white text-black hover:text-white !dark:bg-white !dark:text-black">📖
+          class="rainbow-hover btn btn-outline text-[1rem] hover:btn-primary hover:btn-primary bg-white text-black hover:text-white !dark:bg-white !dark:text-black">📖
           Borrow History</a></li>
       <li><a 
-          class="rainbow-hover btn btn-outline text-lg hover:btn-primary hover:btn-primary bg-white text-black hover:text-white !dark:bg-white !dark:text-black">
+          class="rainbow-hover btn btn-outline text-[1rem] hover:btn-primary hover:btn-primary bg-white text-black hover:text-white !dark:bg-white !dark:text-black">
          📝 My Review</a></li>
       <li><a href="{% url 'update-profile-fun' %}"
-          class="rainbow-hover btn btn-outline text-lg font-bold hover:btn-primary hover:btn-primary bg-white text-black hover:text-white !dark:bg-white !dark:text-black">👤
+          class="rainbow-hover btn btn-outline text-[1rem] font-bold hover:btn-primary hover:btn-primary bg-white text-black hover:text-white !dark:bg-white !dark:text-black">👤
           Profile</a></li>
       <li><a href="{% url 'deposit' %}"
-          class="rainbow-hover btn btn-outline text-lg hover:btn-primary hover:btn-primary bg-white text-black hover:text-white !dark:bg-white !dark:text-black">💳
+          class="rainbow-hover btn btn-outline text-[1rem] hover:btn-primary hover:btn-primary bg-white text-black hover:text-white !dark:bg-white !dark:text-black">💳
           Deposit</a></li>
       <li><a href="{% url 'transaction_history' %}"
-          class="rainbow-hover btn btn-outline text-lg hover:btn-primary hover:btn-primary bg-white text-black hover:text-white !dark:bg-white !dark:text-black">📊
+          class="rainbow-hover btn btn-outline text-[1rem] hover:btn-primary hover:btn-primary bg-white text-black hover:text-white !dark:bg-white !dark:text-black">📊
           Transaction History</a></li>
       {% endif %}
     </ul>
