@@ -125,7 +125,6 @@ def depositView(request):
                 }
                   response = requests.post(SSLZ_URL, data=payload)
                   data = response.json()
-                  print(data)
                   if data.get("status") == "SUCCESS":
                     TransactionModel.objects.create(user=request.user,amount=balance,transaction_type="Credit",payment_status="Pending",reference=payload["tran_id"])
                     return redirect(data["GatewayPageURL"])
