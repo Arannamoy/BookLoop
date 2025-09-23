@@ -34,8 +34,10 @@ def borrowBook(r,id):
         user.balance-=book.borrow_price
         user.save()
         TransactionModel.objects.create(user=r.user,amount=book.borrow_price,transaction_type="Debit",payment_status="Success",reference=f"TXN{r.user.id}BB{TransactionModel.objects.count()}")
-        BorrowRecordModel.objects.create(user=r.user,book=book,borrow_date=datetime.datetime.now(),return_date=datetime.datetime.now() + datetime.timedelta(days=7),return_status="Not")
-        return redirect('borrow_history')
+        borrow=BorrowRecordModel.objects.create(user=r.user,book=book,borrow_date=datetime.datetime.now(),due_date=datetime.datetime.now() + datetime.timedelta(days=7),return_status="Not")
+
+        message=f"The book has been borrowed successfully. Your account has been updated, and the due date for return is {borrow.due_date.strftime('%d %b %Y')}."
+        return render(r,"transaction_modal.html",{"message":message,"borrow":"borrow"})
     else:
         return redirect('login')
     
@@ -50,8 +52,10 @@ def returnBook(r,book_id,borrow_id):
             user.save()
             borrow=BorrowRecordModel.objects.get(pk=borrow_id)
             borrow.return_status="Returned"
+            borrow.return_date=datetime.datetime.now()
             borrow.save()
             TransactionModel.objects.create(user=r.user,amount=book.borrow_price,transaction_type="Credit",payment_status="Success",reference=f"TXN{r.user.id}RB{TransactionModel.objects.count()}")
-            return redirect('borrow_history')
+            message="The book return has been processed successfully. The refunded amount is now available in your account balance."
+            return render(r,"transaction_modal.html",{"message":message,"return":"return"})
         else:
              return redirect('login')
