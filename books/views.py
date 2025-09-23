@@ -4,6 +4,7 @@ from borrow_records.models import Borrow_record as BorrowRecordModel
 from users.models import User as UserModel
 from transactions.models import Transaction as TransactionModel
 from categories.models import Category as CategoryModel
+from django.utils import timezone
 import datetime
 
 # Create your views here.
@@ -45,17 +46,23 @@ def borrowBook(r,id):
 def returnBook(r,book_id,borrow_id):
         if r.user.is_authenticated:
             book=BookModel.objects.get(pk=book_id)
+            user=UserModel.objects.get(user=r.user)
+            borrow=BorrowRecordModel.objects.get(pk=borrow_id)
             book.quantity+=1
             book.save()
-            user=UserModel.objects.get(user=r.user)
+            late_days=max((timezone.now()-borrow.due_date).days,0)
+            fine=max((late_days)*1,0)
+            user.balance-=fine
             user.balance+=book.borrow_price
             user.save()
-            borrow=BorrowRecordModel.objects.get(pk=borrow_id)
             borrow.return_status="Returned"
-            borrow.return_date=datetime.datetime.now()
+            borrow.return_date=timezone.now()
             borrow.save()
             TransactionModel.objects.create(user=r.user,amount=book.borrow_price,transaction_type="Credit",payment_status="Success",reference=f"TXN{r.user.id}RB{TransactionModel.objects.count()}")
-            message="The book return has been processed successfully. The refunded amount is now available in your account balance."
+            message = (
+        f"Book returned successfully on {borrow.return_date.strftime('%d %b %Y')}. "
+        f"Refunded amount: {book.borrow_price} Taka. "
+        f"Late by {late_days} day(s), fine: {fine} Taka has been deducted.")
             return render(r,"transaction_modal.html",{"message":message,"return":"return"})
         else:
              return redirect('login')
