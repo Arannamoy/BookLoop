@@ -17,3 +17,6 @@ class User(models.Model):
     joining_time=models.DateTimeField(auto_now=True,null=True)
     user_image=models.ImageField(upload_to="user_image",null=True,blank=True)
     user_type=models.CharField(choices=USER_TYPE,null=True,default="USER")
+
+    def __str__(self):
+        return f"{self.user.first_name}"

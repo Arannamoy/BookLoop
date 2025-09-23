@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+
     <!-- DaisyUI & Tailwind -->
     <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.23/dist/full.min.css" rel="stylesheet" type="text/css" />
     <script src="https://cdn.tailwindcss.com"></script>
@@ -25,27 +25,27 @@
             },
         };
     </script>
-
     <style>
-    html, body {
-        margin: 0;
-        height: 100%;
-        background: linear-gradient(-45deg, #0d1b2a, #1b263b, #415a77, #a8dadc, #f1faee);
-        background-size: 400% 400%;
-        animation: skyShift 30s ease infinite;
-    }
-
-    @keyframes rainbow {
-        0% { background-position: 0% 50%; }
-        50% { background-position: 100% 50%; }
-        100% { background-position: 0% 50%; }
-    }
-</style>
+        /* Chrome, Safari, Edge autofill fix */
+        input:-webkit-autofill,
+        input:-webkit-autofill:hover,
+        input:-webkit-autofill:focus,
+        textarea:-webkit-autofill,
+        textarea:-webkit-autofill:hover,
+        textarea:-webkit-autofill:focus,
+        select:-webkit-autofill,
+        select:-webkit-autofill:hover,
+        select:-webkit-autofill:focus {
+            -webkit-box-shadow: 0 0 0px 1000px white inset !important;
+            -webkit-text-fill-color: black !important;
+            transition: background-color 5000s ease-in-out 0s;
+        }
+    </style>
 </head>
 
-<body>
-    
-   {% include 'navbar.html' %}
+<body class="bg-white">
+
+    {% include 'navbar.html' %}
     <main class="min-h-screen pt-20">
         {% block content %}
         {% endblock %}
