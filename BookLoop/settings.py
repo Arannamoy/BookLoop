@@ -45,7 +45,8 @@ INSTALLED_APPS = [
     'categories',
     'users',
     'transactions',
-    'borrow_records'
+    'borrow_records',
+    'reviews'
 ]
 
 MIDDLEWARE = [
