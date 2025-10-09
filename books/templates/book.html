@@ -60,6 +60,14 @@
                                 <span class="text-black text-[1rem] ml-1">/ week</span>
                             </div>
                             <div class="flex-shrink-0 w-full sm:w-auto">
+                                <a onclick="discussion_modal.showModal()"
+                                    class="w-full flex items-center justify-center bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-full transition-all duration-300 transform hover:scale-105 shadow-md hover:shadow-lg">
+                                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                                    </svg>
+                                    View Discussion
+                                </a>
                                 {% if book.quantity > 0 %}
                                 <a href="{% url 'borrow_book' book.id %}"
                                     class="w-full flex items-center justify-center bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-full transition-all duration-300 transform hover:scale-105 shadow-md hover:shadow-lg">
@@ -105,11 +113,12 @@
                         <div class="grid grid-cols-2 gap-x-6 gap-y-4 text-sm">
                             <div>
                                 {% if book.category %}
-                                
+
                                 <div class="flex gap-[10px] flex-wrap justify-even items-center">
                                     <p class="text-black text-[1.2rem] font-bold">Category:</p>
                                     {% for category in book.category.all %}
-                                    <p class="btn btn-outline m-[5px] font-semibold text-[1.1rem] text-black">{{ category.title }}</p>
+                                    <p class="btn btn-outline m-[5px] font-semibold text-[1.1rem] text-black">
+                                        {{ category.title }}</p>
                                     {% endfor %}
                                 </div>
                                 {% endif %}
@@ -120,9 +129,11 @@
                 </div>
             </div>
         </div>
+
         {% include 'review_carousel.html' with reviews=reviews %}
     </div>
 </div>
+
 
 
 
@@ -203,5 +214,4 @@
         document.getElementById('image_preview').classList.add('hidden');
     }
 </script>
-
 {% endblock %}
