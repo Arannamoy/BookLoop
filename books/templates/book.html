@@ -120,6 +120,88 @@
                 </div>
             </div>
         </div>
+        {% include 'review_carousel.html' with reviews=reviews %}
     </div>
 </div>
+
+
+
+<dialog id="discussion_modal" class="modal">
+    <div
+        class="modal-box !w-[80%] !h-[80%] bg-white text-gray-900 flex flex-col rounded-2xl shadow-2xl overflow-hidden p-0">
+        <!-- Header -->
+        <div class="w-full bg-gray-100 border-b px-6 py-3 text-left font-semibold text-lg sticky top-0">
+            💬 Discussion Room
+        </div>
+
+        <!-- Scrollable Chat Area -->
+        <div id="comment_section" class="flex-1 overflow-y-auto px-6 py-4 space-y-5 bg-white">
+            <!-- Example Chat Bubble 1 -->
+
+
+            {% for discussion in discussions %}
+            <div class="flex flex-col items-start">
+                <div class="flex items-center gap-2">
+                    <p class="font-semibold text-sm">{{discussion.user.first_name}}</p>
+                    <span class="text-xs text-gray-500">{{discussion.created_at}}</span>
+                </div>
+                <div class="bg-gray-100 p-3 rounded-2xl max-w-[70%]">
+                    {{discussion.comment}}
+                </div>
+                <!-- Example Image -->
+                {% if discussion.discussion_image %}
+                <img src="{{ discussion.discussion_image.url }}" alt="attachment"
+                    class="mt-2 rounded-xl max-w-[200px] border">
+                {% endif %}
+
+            </div>
+            {% endfor %}
+        </div>
+
+        <!-- Input Area -->
+        <form action="{% url 'create_discussion' book.id%}" method="post" enctype="multipart/form-data"
+            class="border-t bg-gray-50 flex items-center gap-3 px-4 py-3 sticky bottom-0">
+            {%csrf_token%}
+            <!-- Attachment -->
+            <label for="image_upload"
+                class="cursor-pointer flex items-center justify-center bg-gray-100 hover:bg-gray-200 p-2 rounded-full transition-all duration-200 shadow-sm">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8"
+                    stroke="currentColor" class="w-6 h-6 text-gray-700">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M21.44 11.05l-9.19 9.19a5 5 0 11-7.07-7.07l9.19-9.19a3.5 3.5 0 014.95 4.95l-9.19 9.19a2 2 0 01-2.83-2.83l8.13-8.13" />
+                </svg>
+                <input id="image_upload" type="file" accept="image/*" class="hidden" onchange="previewImage(event)" />
+            </label>
+
+            <!-- Image Preview -->
+            <div id="image_preview" class="hidden relative">
+                <img id="preview_img" class="w-12 h-12 rounded-md border" />
+                <button type="button" onclick="removeImage()"
+                    class="absolute -top-1 -right-1 bg-red-500 text-white rounded-full text-xs px-1">✖</button>
+            </div>
+
+            <!-- Textarea -->
+            <textarea
+                class="textarea textarea-bordered flex-1 bg-white text-gray-900 resize-none h-16 rounded-xl shadow-inner"
+                placeholder="Write a comment..." name="comment"></textarea>
+
+            <!-- Send Button -->
+            <button type="submit" class="btn btn-neutral rounded-full p-3">
+                Send
+            </button>
+        </form>
+    </div>
+
+    <!-- Backdrop -->
+    <form method="dialog" class="modal-backdrop bg-black/40">
+        <button>close</button>
+    </form>
+</dialog>
+<script>
+    function removeImage() {
+        document.getElementById('image_upload').value = '';
+        document.getElementById('image_preview').classList.add('hidden');
+    }
+</script>
+
 {% endblock %}
