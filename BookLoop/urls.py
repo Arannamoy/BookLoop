@@ -25,7 +25,9 @@ urlpatterns = [
     path('user/',include('users.urls')),
     path('transaction/',include('transactions.urls')),
     path('borrow/',include('borrow_records.urls')),
-    path('book/',include('books.urls'))
+    path('book/',include('books.urls')),
+    path('review/',include('reviews.urls')),
+    path('discussion/',include('discussions.urls'))
 
 ]
 urlpatterns += static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
