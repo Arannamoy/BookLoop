@@ -1,4 +1,4 @@
-<div class="navbar fixed bg-base-100 shadow-sm top-0 left-0 w-full z-50 py-4 px-6">
+<div class="navbar fixed bg-black shadow-sm top-0 left-0 w-full z-50 py-4 px-6">
   <div class="navbar-start">
     <div class="dropdown">
       <div tabindex="0" role="button" class="btn btn-ghost lg:hidden">
@@ -6,7 +6,7 @@
       </div>
       <ul
         tabindex="0"
-        class="menu menu-sm dropdown-content bg-base-100 rounded-box z-1  mt- w-52 p-2 shadow">
+        class="menu menu-sm dropdown-content bg-black rounded-box z-1  mt- w-52 p-2 shadow">
         <li><a href="{% url 'get-all-book' None %}"
           class=" rainbow-hover btn btn-outline text-[1rem] hover:text-[1.5rem] mx-[10px] my-[10px] hover:btn-primary hover:btn-primary bg-white text-black hover:text-white !dark:bg-white !dark:text-black">📚
           Browse Books</a></li>
@@ -32,7 +32,7 @@
       {% endif %}
       </ul>
     </div>
-    <a class="btn btn-ghost text-xl" href="{% url 'home' %}">BookLoop</a>
+    <a class="btn btn-ghost text-[2rem] text-white cedarville-cursive-regular" href="{% url 'home' %}">BookLoop</a>
   </div>
   <div class="navbar-center hidden lg:flex">
     <!-- <ul class="menu menu-horizontal px-1"> -->
