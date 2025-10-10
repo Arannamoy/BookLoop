@@ -118,6 +118,6 @@ pip freeze | python -c "for p in __import__('sys').stdin: print(p.split('=')[0])
 
 #### 
 ```bash
-tree -a -I 'node_modules|.git|__pycache__|.vscode|migrations|.venv' > structure.txt
+tree -a -I 'node_modules|.git|__pycache__|.vscode|migrations|.venv | ss' > structure.txt
 ```
 ### root@1234
