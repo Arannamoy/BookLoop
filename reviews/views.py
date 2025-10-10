@@ -26,8 +26,11 @@ def createReview(r,id):
             
             comment=data['comment']
             review_image=r.FILES.get('review_image')
-            print(user,borrow_record,book,rating,comment,review_image)
-            Review.objects.create(user=user,book=book,borrow_record=borrow_record,rating=rating,comment=comment)
+            # print(user,borrow_record,book,rating,comment,review_image)
+            if review_image:
+                Review.objects.create(user=user,book=book,borrow_record=borrow_record,rating=rating,comment=comment,review_image=review_image)
+            else:
+               Review.objects.create(user=user,book=book,borrow_record=borrow_record,rating=rating,comment=comment) 
             borrow_record.review_status=True
             borrow_record.save()
             return redirect('borrow_history')

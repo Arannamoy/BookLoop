@@ -5,6 +5,7 @@ from django.urls import reverse_lazy
 from django.contrib.auth.views import LoginView
 from django.contrib.auth import logout
 from .models import User as UserModel
+from django.contrib.auth.models import User
 from transactions.models import Transaction as TransactionModel
 from django.views import View
 from django.views.decorators.csrf import csrf_exempt
@@ -77,11 +78,19 @@ def updateUserProfile(r):
             last_name=data['last_name']
             contact_no=data['contact_no']
             user_image=r.FILES.get('user_image')
-            user=UserModel.objects.get(user=r.user)
-            #user
-            user.user_image=user_image
-            user.save()
-            print(user_image)
+            userC=UserModel.objects.get(user=r.user)
+            userB=User.objects.get(pk=r.user.id)
+            if first_name:
+               userB.first_name=first_name
+            if last_name:   
+               userB.last_name=last_name
+            userB.save()
+            if contact_no:
+               userC.contact_no=contact_no
+            if user_image:
+               userC.user_image=user_image
+            userC.save()
+          #   print(user_image)
             return redirect('update-profile-fun')
        else:
           return render(r,'update_profile_t.html')

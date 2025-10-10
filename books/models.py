@@ -12,7 +12,7 @@ class Book(models.Model):
     borrow_price=models.DecimalField(decimal_places=2,max_digits=12,null=True)
     book_image=models.ImageField(upload_to="book_image",null=True)
     added_by=models.ForeignKey(UserModel,related_name="user_add",on_delete=models.CASCADE)
-    category=models.ManyToManyField(CategoryModel,related_name="book_categories",null=True)
+    category=models.ManyToManyField(CategoryModel,related_name="book_categories")
     quantity=models.IntegerField(null=True)
     total_borrowed_time=models.IntegerField(default=0,null=True)
 
