@@ -144,7 +144,7 @@ Extends Django’s default user with library-specific data.
 
 ---
 
-Would you like me to create a **Mermaid class diagram** for all of these models together (with relationships)?
+> Prerequirement: Python
 
 
 ## Installation and Setup
