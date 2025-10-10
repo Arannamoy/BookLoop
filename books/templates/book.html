@@ -91,6 +91,7 @@
                     </div>
                     <div>
                         <h3 class="font-bold text-black mb-3 text-[2rem] pb-2"> {{ book.title|linebreaks }}</h3>
+                        <h3 class="font-bold text-black mb-3 text-[1rem] pb-2">By {{book.author}}</h3>
                     </div>
                     <!-- Book Description -->
                     <div>
@@ -168,11 +169,116 @@
             
         </div>
         <div class="flex justify-center my-[25px]">
-                    <a onclick="discussion_modal.showModal()"
-                                    class="w-full flex items-center justify-center bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-full transition-all duration-300 transform hover:scale-105 shadow-md hover:shadow-lg">
-                                    💬
-                                    View Discussion
-                                </a>
+                    <div class="w-full max-w-4xl mx-auto my-6">
+  <!-- Accordion Header -->
+  <button
+    id="discussion_toggle"
+    class="w-full flex items-center justify-between bg-indigo-100 hover:bg-indigo-200 transition-colors duration-300 px-5 py-3 rounded-xl shadow-md">
+    <span class="font-semibold text-lg text-indigo-700">💬 Discussion Room</span>
+    <svg id="arrow_icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+      stroke-width="2" stroke="currentColor" class="w-6 h-6 text-indigo-700 transition-transform duration-300">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+    </svg>
+  </button>
+
+  <!-- Accordion Body -->
+  <div id="discussion_content"
+    class="max-h-0 overflow-hidden transition-all duration-500 ease-in-out bg-white border border-indigo-100 rounded-b-2xl shadow-inner">
+
+    <!-- Scrollable Chat Area -->
+    <div id="comment_section" class="max-h-[50vh] overflow-y-auto px-6 py-4 space-y-5 bg-white">
+      {% for discussion in discussions %}
+      <div class="flex flex-col items-start">
+        <div class="flex items-center gap-2">
+          <p class="font-semibold text-sm">{{discussion.user.first_name}}</p>
+          <span class="text-xs text-gray-500">{{discussion.created_at}}</span>
+        </div>
+        <div class="bg-gray-100 p-3 rounded-2xl max-w-[70%]">
+          {{discussion.comment}}
+        </div>
+        {% if discussion.discussion_image %}
+        <img src="{{ discussion.discussion_image.url }}" alt="attachment"
+          class="mt-2 rounded-xl max-w-[200px] border">
+        {% endif %}
+      </div>
+      {% endfor %}
+    </div>
+
+    <!-- Input Area -->
+    <form action="{% url 'create_discussion' book.id %}" method="post" enctype="multipart/form-data"
+      class="border-t bg-gray-50 flex items-center gap-3 px-4 py-3 sticky bottom-0"
+      onsubmit="handleSend(event)">
+      {% csrf_token %}
+      <!-- Attachment -->
+      <label for="image_upload"
+        class="cursor-pointer flex items-center justify-center bg-gray-100 hover:bg-gray-200 p-2 rounded-full transition-all duration-200 shadow-sm">
+        📎
+        <input id="image_upload" type="file" name="discussion_image" accept="image/*" class="hidden"
+          onchange="previewImage(event)" />
+      </label>
+
+      <!-- Image Preview -->
+      <div id="image_preview" class="hidden relative">
+        <img id="preview_img" class="w-12 h-12 rounded-md border" />
+        <button type="button" onclick="removeImage()"
+          class="absolute -top-1 -right-1 bg-red-500 text-white rounded-full text-xs px-1">✖</button>
+      </div>
+
+      <!-- Textarea -->
+      <textarea
+        class="textarea textarea-bordered flex-1 bg-white text-gray-900 resize-none h-16 rounded-xl shadow-inner"
+        placeholder="Write a comment..." name="comment"></textarea>
+
+      <!-- Send Button -->
+      <button type="submit" class="btn btn-neutral rounded-full p-3">
+        🚀 Send
+      </button>
+    </form>
+  </div>
+</div>
+
+<script>
+  const toggleBtn = document.getElementById("discussion_toggle");
+  const content = document.getElementById("discussion_content");
+  const arrow1 = document.getElementById("arrow_icon");
+
+  toggleBtn.addEventListener("click", () => {
+    const isOpen = content.classList.contains("open");
+
+    if (isOpen) {
+      content.style.maxHeight = "0px";
+      content.classList.remove("open");
+      arrow1.style.transform = "rotate(0deg)";
+    } else {
+      content.style.maxHeight = content.scrollHeight + "px";
+      content.classList.add("open");
+      arrow1.style.transform = "rotate(180deg)";
+    }
+  });
+
+  // Prevent modal close on Send click
+  function handleSend(e) {
+    e.preventDefault();
+    console.log("Message sent (accordion stays open)");
+  }
+
+  // Image preview
+  function previewImage(event) {
+    const previewDiv = document.getElementById('image_preview');
+    const previewImg = document.getElementById('preview_img');
+    const file = event.target.files[0];
+    if (file) {
+      previewDiv.classList.remove('hidden');
+      previewImg.src = URL.createObjectURL(file);
+    }
+  }
+
+  // Remove image
+  function removeImage() {
+    document.getElementById('image_upload').value = '';
+    document.getElementById('image_preview').classList.add('hidden');
+  }
+</script>
                 </div>
 
         {% include 'review_carousel.html' with reviews=reviews %}
@@ -182,82 +288,5 @@
 
 
 
-<dialog id="discussion_modal" class="modal">
-    <div
-        class="modal-box !w-[80%] !h-[80%] bg-white text-gray-900 flex flex-col rounded-2xl shadow-2xl overflow-hidden p-0">
-        <!-- Header -->
-        <div class="w-full bg-gray-100 border-b px-6 py-3 text-left font-semibold text-lg sticky top-0">
-            💬 Discussion Room
-        </div>
 
-        <!-- Scrollable Chat Area -->
-        <div id="comment_section" class="flex-1 overflow-y-auto px-6 py-4 space-y-5 bg-white">
-            <!-- Example Chat Bubble 1 -->
-
-
-            {% for discussion in discussions %}
-            <div class="flex flex-col items-start">
-                <div class="flex items-center gap-2">
-                    <p class="font-semibold text-sm">{{discussion.user.first_name}}</p>
-                    <span class="text-xs text-gray-500">{{discussion.created_at}}</span>
-                </div>
-                <div class="bg-gray-100 p-3 rounded-2xl max-w-[70%]">
-                    {{discussion.comment}}
-                </div>
-                <!-- Example Image -->
-                {% if discussion.discussion_image %}
-                <img src="{{ discussion.discussion_image.url }}" alt="attachment"
-                    class="mt-2 rounded-xl max-w-[200px] border">
-                    <h1>Image</h1>
-                {% endif %}
-
-            </div>
-            {% endfor %}
-        </div>
-
-        <!-- Input Area -->
-        <form action="{% url 'create_discussion' book.id%}" method="post" enctype="multipart/form-data"
-            class="border-t bg-gray-50 flex items-center gap-3 px-4 py-3 sticky bottom-0">
-            {%csrf_token%}
-            <!-- Attachment -->
-            <label for="image_upload"
-                class="cursor-pointer flex items-center justify-center bg-gray-100 hover:bg-gray-200 p-2 rounded-full transition-all duration-200 shadow-sm">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8"
-                    stroke="currentColor" class="w-6 h-6 text-gray-700">
-                    <path stroke-linecap="round" stroke-linejoin="round"
-                        d="M21.44 11.05l-9.19 9.19a5 5 0 11-7.07-7.07l9.19-9.19a3.5 3.5 0 014.95 4.95l-9.19 9.19a2 2 0 01-2.83-2.83l8.13-8.13" />
-                </svg>
-                <input id="image_upload" type="file" name="discussion_image" accept="image/*" class="hidden" onchange="previewImage(event)" />
-            </label>
-
-            <!-- Image Preview -->
-            <div id="image_preview" class="hidden relative">
-                <img id="preview_img" class="w-12 h-12 rounded-md border" />
-                <button type="button" onclick="removeImage()"
-                    class="absolute -top-1 -right-1 bg-red-500 text-white rounded-full text-xs px-1">✖</button>
-            </div>
-
-            <!-- Textarea -->
-            <textarea
-                class="textarea textarea-bordered flex-1 bg-white text-gray-900 resize-none h-16 rounded-xl shadow-inner"
-                placeholder="Write a comment..." name="comment"></textarea>
-
-            <!-- Send Button -->
-            <button type="submit" class="btn btn-neutral rounded-full p-3">
-                Send
-            </button>
-        </form>
-    </div>
-
-    <!-- Backdrop -->
-    <form method="dialog" class="modal-backdrop bg-black/40">
-        <button>close</button>
-    </form>
-</dialog>
-<script>
-    function removeImage() {
-        document.getElementById('image_upload').value = '';
-        document.getElementById('image_preview').classList.add('hidden');
-    }
-</script>
 {% endblock %}
