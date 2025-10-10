@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from books.models import Book as BookModel
 from categories.models import Category as CategoryModel
 from reviews.models import Review as ReviewModel
@@ -10,3 +10,5 @@ def homeView(r):
     for re in reviews:
         print(re.user.user_acc.user_image)
     return render(r,"index.html",{"books":books,"categorys":categorys,"reviews":reviews})
+def redirect_home(request, exception):
+    return redirect('home')

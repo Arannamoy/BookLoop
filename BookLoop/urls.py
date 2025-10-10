@@ -14,11 +14,13 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from django.conf.urls import handler404
 from django.contrib import admin
 from django.urls import path,include
 from django.conf import settings
 from django.conf.urls.static import static
 from .views import homeView
+handler404 = views.redirect_home
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',homeView,name='home'),
@@ -28,6 +30,7 @@ urlpatterns = [
     path('book/',include('books.urls')),
     path('review/',include('reviews.urls')),
     path('discussion/',include('discussions.urls'))
+    
 
 ]
 urlpatterns += static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
