@@ -226,6 +226,20 @@ pip freeze | python -c "for p in __import__('sys').stdin: print(p.split('=')[0])
 #### Generated Project File Structure (Using Tree Command)
 
 ```bash
-tree -a -I 'node_modules|.git|__pycache__|.vscode|migrations|.venv | ss' > structure.txt
+tree -a -I 'node_modules|.git|__pycache__|.vscode|migrations|.venv | ss | .env' > structure.txt
 ```
 ### root@1234
+
+
+### Screenshot
+
+<img src="./ss/Sign-Up.png">
+<img src="./ss/Log-In.png">
+<img src="./ss/Homepage_login.png">
+<img src="./ss/Deposit.png">
+<img src="./ss/SSL_Gateway.png">
+<img src="./ss/OTP_Page.png">
+<img src="./ss/Transactions_history.png">
+<img src="./ss/Discussion.png">
+<img src="./ss/Borrow_History_Review.png">
+<img src="./ss/Update_Profile.png">
