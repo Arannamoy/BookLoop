@@ -4,6 +4,8 @@ from borrow_records.models import Borrow_record as BorrowRecordModel
 from users.models import User as UserModel
 from transactions.models import Transaction as TransactionModel
 from categories.models import Category as CategoryModel
+from discussions.models import Discussion as DiscussionModel 
+from reviews.models import Review as ReviewModel
 from django.utils import timezone
 import datetime
 
@@ -17,7 +19,9 @@ def getAllBook(r,slug=None):
 
 def getSpecificBook(r,id):
         book=BookModel.objects.get(pk=id)
-        return render(r,'book.html',{'book':book})
+        discussions=DiscussionModel.objects.filter(book=book)
+        reviews=ReviewModel.objects.filter(book=book)
+        return render(r,'book.html',{'book':book,'discussions':discussions,"reviews":reviews})
    
 
 def borrowBook(r,id):

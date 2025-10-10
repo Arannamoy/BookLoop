@@ -13,7 +13,7 @@ class Borrow_record(models.Model):
     due_date=models.DateTimeField(null=True)
     return_date =models.DateTimeField(null=True,blank=True)
     created_at =models.DateTimeField(auto_now=True,null=True)
-
+    review_status=models.BooleanField(default=False)
     @property
     def remaining_days(self):
         if self.due_date and self.borrow_date:

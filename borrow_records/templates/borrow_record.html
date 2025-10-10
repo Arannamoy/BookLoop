@@ -111,7 +111,7 @@
                         <th class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                             Return Date
                         </th>
-                        
+
                     </tr>
                 </thead>
                 <tbody class="bg-white divide-y divide-gray-200">
@@ -146,7 +146,7 @@
                             <div class="text-sm text-gray-900">{{ r.due_date|date:"M d, Y" }}</div>
                             <div class="text-sm text-gray-500">{{ r.due_date|time:"g:i A" }}</div>
                         </td>
-                        
+
                         <td class="px-6 py-4 whitespace-nowrap">
                             {% if r.return_status != "Not" %}
                             <div class="flex items-center space-x-2">
@@ -159,6 +159,119 @@
                                     Returned on {{ r.return_date|date:"M d, Y" }} at {{ r.return_date|time:"g:i A" }}
                                 </span>
                             </div>
+                            {% if r.review_status %}
+                            <div class="justify-center flex my-[10px]">
+                                <a 
+                                class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-lg text-white bg-lime-600 hover:bg-red-700 transition-colors duration-200">
+                                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M3 10h10a8 8 0 018 8v2M3 10l6 6m-6-6l6-6"></path>
+                                </svg>
+                                Already Reviewed
+                            </a>
+                            </div>
+                            {%else%}
+                            <div class="justify-center flex my-[10px]">
+                                <a onclick="review_modal.showModal()"
+                                class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-lg text-white bg-lime-600 hover:bg-red-700 transition-colors duration-200">
+                                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M3 10h10a8 8 0 018 8v2M3 10l6 6m-6-6l6-6"></path>
+                                </svg>
+                                Review Now
+                            </a>
+                            
+<dialog id="review_modal" class="modal">
+                            <div
+                                class="modal-box w-11/12 max-w-3xl bg-white text-black rounded-2xl shadow-lg flex flex-col"
+                            >
+                                <h3 class="text-2xl font-semibold mb-4 text-gray-800">Write a Review</h3>
+
+                                <!-- Scrollable Area -->
+                                <div class="overflow-y-auto max-h-[65vh] pr-2">
+                                <form action="{% url 'create_review' r.id %}" method="POST" enctype="multipart/form-data" class="space-y-4">
+                                    <!-- Rating Section -->
+                                    {% csrf_token %}
+                                    <div>
+                                    <label class="block font-medium mb-2 text-gray-700">Your Rating:</label>
+                                    <div id="starRating" class="flex gap-2 text-2xl cursor-pointer text-gray-400">
+                                        <span class="star" data-value="1">★</span>
+                                        <span class="star" data-value="2">★</span>
+                                        <span class="star" data-value="3">★</span>
+                                        <span class="star" data-value="4">★</span>
+                                        <span class="star" data-value="5">★</span>
+                                    </div>
+                                    <input type="hidden" name="rating" id="ratingValue" required>
+                                    </div>
+
+                                    <!-- Comment Section -->
+                                    <div>
+                                    <label class="block font-medium mb-2 text-gray-700">Your Comment:</label>
+                                    <textarea
+                                        name="comment"
+                                        class="textarea textarea-bordered w-full bg-gray-50 text-gray-900"
+                                        placeholder="Write your review..."
+                                        rows="4"
+                                        required
+                                    ></textarea>
+                                    </div>
+
+                                    <!-- Image Upload -->
+                                    <div>
+                                    <label class="block font-medium mb-2 text-gray-700">Attach Image:</label>
+                                    <div class="flex items-center gap-3">
+                                        <label
+                                        for="imageUpload"
+                                        class="flex items-center gap-2 cursor-pointer px-4 py-2 rounded-lg border border-gray-300 hover:bg-gray-100 transition"
+                                        >
+                                        📎 <span>Choose File</span>
+                                        </label>
+                                        <input type="file" id="imageUpload" name="review_image" accept="image/*" class="hidden" />
+                                        <span id="fileName" class="text-sm text-gray-600"></span>
+                                    </div>
+                                    </div>
+
+                                    <!-- Submit -->
+                                    <div class="flex justify-end mt-6">
+                                    <button
+                                        type="submit"
+                                        class="px-5 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg shadow-md transition"
+                                    >
+                                        Submit Review
+                                    </button>
+                                    </div>
+                                </form>
+                                </div>
+                            </div>
+
+                            <!-- Backdrop -->
+                            <form method="dialog" class="modal-backdrop">
+                                <button>close</button>
+                            </form>
+
+                            <script>
+                                // ⭐ Star rating logic
+                                const stars = document.querySelectorAll(".star");
+                                const ratingInput = document.getElementById("ratingValue");
+                                stars.forEach((star, index) => {
+                                star.addEventListener("click", () => {
+                                    ratingInput.value = index + 1;
+                                    stars.forEach((s, i) => {
+                                    s.style.color = i <= index ? "gold" : "gray";
+                                    });
+                                });
+                                });
+
+                                // 📎 File name preview
+                                const fileInput = document.getElementById("imageUpload");
+                                const fileName = document.getElementById("fileName");
+                                fileInput.addEventListener("change", () => {
+                                fileName.textContent = fileInput.files[0]?.name || "";
+                                });
+                            </script>
+                            </dialog>                            
+                            </div>
+                            {%endif%}
                             {% else %}
                             <a href="{% url 'return_book' r.book.id r.id %}"
                                 class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-lg text-white bg-red-600 hover:bg-red-700 transition-colors duration-200">
@@ -280,4 +393,13 @@
     </div>
     {% endif %}
 </div>
+
+
+
+
+
+
+
+
+
 {% endblock %}
