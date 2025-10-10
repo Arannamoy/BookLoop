@@ -149,21 +149,21 @@ Extends Django’s default user with library-specific data.
 
 ## Installation and Setup
 
-- 1 Open terminal and install git (if not installed ).
+- Open terminal and install git (if not installed ).
 
-- 2 project clone 
+- project clone 
 
 ```bash
 git clone https://github.com/Arannamoy-Mondal/BookLoop.git
 ```
 
-- 3 Create virtual environment
+- Create virtual environment
 
 ```bash
 python -m venv .venv
 ```
 
-- 4 Activate virtual environment
+- Activate virtual environment
 
 `For Windows`
 
@@ -177,45 +177,18 @@ python -m venv .venv
 source .venv/bin/activate
 ```
 
-- 5 Install requirements.txt
+- Install requirements.txt
 
 ```bash
 pip install -r requirements.txt
 ```
 
-- 3  
-- 2 
-
-```bash 
-git branch osman
-```
-
-- 3
+- Run project
 
 ```bash
-git checkout osman
+cd BookLoop
+python manage.py runserver 
 ```
-
-- 4
-```bash
-git add . && git commit -m ""
-```
-- 5
-```bash
-git push origin osman
-```
-
-- cancel commit & remove code
-
-```bash
-git reset --hard HEAD~1
-```
-
-
-
-
-
-
 
 #### Requirements.txt without version
 
