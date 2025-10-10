@@ -178,3 +178,25 @@ def payment_cancel(request):
     transaction.save()
     return redirect('transaction_history')
 
+
+
+
+from django.contrib.auth import login,authenticate
+from django.contrib import messages
+def login_fun(r):
+    if r.user.is_authenticated:
+        return redirect("home")
+    else:
+         if r.method=="POST":
+             data=r.POST
+             username=data['username']
+             password=data['password']
+             user=authenticate(request=r,username=username,password=password)
+             if user is not None:
+                login(request=r,user=user)
+                return redirect("home")
+             else:
+                 messages.error(r, "Invalid username or password")
+                 return render(r,"login_form_fun.html")
+                 
+         return render(r,"login_form_fun.html")

@@ -1,5 +1,5 @@
 from django.urls import path,include
-from .views import LogInView,LogOutView,SignUpView,depositView,UserUpdateView,updateUserProfile,payment_success,payment_fail,payment_cancel
+from .views import LogInView,LogOutView,SignUpView,depositView,UserUpdateView,updateUserProfile,payment_success,payment_fail,payment_cancel,login_fun
 
 urlpatterns=[
     path('login/',LogInView.as_view(),name="login"),
@@ -11,4 +11,6 @@ urlpatterns=[
     path("deposit/payment/success/", payment_success, name="payment_success"),
     path("deposit/payment/fail/", payment_fail, name="payment_fail"),
     path("deposit/payment/cancel/", payment_cancel, name="payment_cancel"),
+
+    path("loginf/",login_fun,name="login-fun")
 ]
