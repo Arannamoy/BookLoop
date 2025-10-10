@@ -29,6 +29,124 @@ The motivation behind developing this project is to build an open-source, cashle
 
 By integrating online payments, automated fine calculation, and interactive discussions, this system reduces human error and enhances user engagement. The project envisions creating a secure and hassle-free readers’ community where literature enthusiasts can borrow, review, and discuss books effortlessly. Ultimately, it promotes the vision of a digitally connected reading culture that bridges the gap between technology and education.
 
+
+### 🧾 **1. Book Model**
+
+Represents a book in the library.
+
+**Fields:**
+
+* `title`: Book name.
+* `description`: Book summary/details.
+* `author`: Author name.
+* `add_date`: Date the book was added.
+* `borrow_price`: Borrowing cost per use.
+* `book_image`: Book cover image.
+* `added_by`: The admin/user who added the book.
+* `category`: Linked categories (Many-to-Many).
+* `quantity`: Total available copies.
+* `total_borrowed_time`: Number of times borrowed.
+
+---
+
+### 📚 **2. Borrow_record Model**
+
+Tracks each borrowing activity.
+
+**Fields:**
+
+* `user`: Who borrowed the book.
+* `book`: Which book was borrowed.
+* `borrow_date`: When it was borrowed.
+* `return_status`: Current status (e.g., pending/returned).
+* `due_date`: Deadline for returning.
+* `return_date`: When actually returned.
+* `created_at`: Record creation time.
+* `review_status`: Whether a review was given or not.
+
+---
+
+### 🏷️ **3. Category Model**
+
+Defines book categories or genres.
+
+**Fields:**
+
+* `title`: Category name.
+* `added_by`: Who created the category.
+* `add_date`: When it was added.
+* `slug`: Unique URL-friendly identifier.
+
+---
+
+### 💬 **4. Discussion Model**
+
+Handles user discussions/comments about books.
+
+**Fields:**
+
+* `user`: Who commented.
+* `book`: Which book discussion is about.
+* `comment`: Text content of the discussion.
+* `discussion_image`: Optional discussion image.
+* `created_at`: When discussion was created.
+
+---
+
+### ⭐ **5. Review Model**
+
+Stores user reviews for borrowed books.
+
+**Fields:**
+
+* `user`: Reviewer.
+* `book`: Reviewed book.
+* `borrow_record`: Links to that specific borrow instance.
+* `rating`: Given rating (choice field).
+* `comment`: Optional text review.
+* `review_image`: Optional image in review.
+* `created_at`: When review was made.
+
+---
+
+### 💳 **6. Transaction Model**
+
+Logs user payments and deposits.
+
+**Fields:**
+
+* `user`: Who made the transaction.
+* `amount`: Transaction amount.
+* `transaction_type`: Type (Deposit, Deduct, Refund, etc.).
+* `payment_status`: Status (Success, Pending, Failed).
+* `created_at`: Time of transaction.
+* `reference`: Transaction reference ID/details.
+
+---
+
+### 👤 **7. User Model (Custom User Info)**
+
+Extends Django’s default user with library-specific data.
+
+**Fields:**
+
+* `user`: Links to Django’s base `User`.
+* `email`: User’s email (unique).
+* `contact_no`: Phone number (unique).
+* `borrowed_books`: Books currently borrowed (Many-to-Many).
+* `gender`: Gender info.
+* `deposit_date`: When deposit was made.
+* `balance`: Current wallet/balance amount.
+* `dob`: Date of birth.
+* `joining_time`: Account creation/joining time.
+* `user_image`: Profile picture.
+* `user_type`: Role (Admin/User).
+
+---
+
+Would you like me to create a **Mermaid class diagram** for all of these models together (with relationships)?
+
+
 ## Installation and Setup
 
 - 1 Open terminal and install git (if not installed ).
