@@ -140,7 +140,7 @@ def depositView(request):
                   return redirect('home')
                else:
                     return render(request, "deposit_form.html", {"form": form, "error": "SSL Init Failed"})
-          return render(request,'deposit_form.html',{'form':DepositForm()})
+          return render(request,'deposit_form.html',{'form':DepositForm(),'title':'BookLoop | Deposit'})
      else:
           return redirect('login')
 

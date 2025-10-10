@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
- {% block head_title %}
+ {% block title %}
  {{ title }}
  {% endblock %} 
  {% block content %}
@@ -7,12 +7,12 @@
     <div class="bg-white w-5/12 rounded-lg">      
         <form method="post" class="px-8 pt-6 pb-8 mb-4">
             {% csrf_token %}
-            <h1 class="text-center text-[1.25rem] font-bold">Please deposit first.</h1>
+            <h1 class="text-center text-black text-[1.25rem] font-bold">Please deposit first.</h1>
             <div class="mb-4">
-                <label class="block text-gray-700 text-sm font-bold mb-2" for="balance">
+                <label class="block text-black text-sm font-bold mb-2" for="balance">
                     Amount
                 </label>
-                <input class="bg-white  appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight border rounded-md border-gray-500 focus:outline-none focus:shadow-outline" value="" name="balance" id="balance" type="number" required placeholder="Amount">
+                <input class="bg-white  appearance-none border rounded w-full py-2 px-3 text-black leading-tight border rounded-md border-gray-500 focus:outline-none focus:shadow-outline" value="" name="balance" id="balance" type="number" required placeholder="Amount">
             </div>
             {% if form.amount.errors %} 
             {% for error in form.amount.errors %}
