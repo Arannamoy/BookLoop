@@ -33,7 +33,7 @@
               {% endif %}
             </td>
             <td class="px-6 py-4 whitespace-nowrap text-sm font-semibold text-gray-900">
-              ${{transaction.amount}}
+              BDT {{transaction.amount}}
             </td>
             <td class="px-6 py-4 whitespace-nowrap">
               {% if transaction.payment_status == 'Success' %}
@@ -83,7 +83,7 @@
         <div class="grid grid-cols-2 gap-4 mb-3">
           <div>
             <p class="text-xs font-medium text-gray-500 uppercase tracking-wider">Amount</p>
-            <p class="text-lg font-bold text-gray-900">${{transaction.amount}}</p>
+            <p class="text-lg font-bold text-gray-900">BDT {{transaction.amount}}</p>
           </div>
           <div>
             <p class="text-xs font-medium text-gray-500 uppercase tracking-wider">Status</p>
