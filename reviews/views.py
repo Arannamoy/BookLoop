@@ -44,3 +44,11 @@ def reviewHistory(r):
        return render(r,"review_history.html",{"reviews":reviews})
     else:
         return redirect("login")
+    
+    
+def allReviewHistory(r):
+    if r.user.is_authenticated and r.user.user_acc.user_type=="ADMINISTRATOR":
+       reviews=Review.objects.all()
+       return render(r,"review_history.html",{"reviews":reviews})
+    else:
+        return redirect("login")

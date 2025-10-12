@@ -29,7 +29,7 @@
       {% endif %}
       </ul>
     </div>
-    <a class="btn btn-ghost text-[2rem] text-white cedarville-cursive-regular" href="{% url 'home' %}">BookLoop</a>
+    <a class="btn btn-ghost text-[2rem] text-white cedarville-cursive-regular font-bold" href="{% url 'home' %}">BookLoop</a>
   </div>
   <div class="navbar-center hidden lg:flex">
     <!-- <ul class="menu menu-horizontal px-1"> -->
@@ -43,19 +43,16 @@
           Browse Books</a></li>
       {% if user.is_authenticated %}
       {% if user.user_acc.user_type == "ADMINISTRATOR" %}
+      <li><a href="{% url 'get-all-book' None%}"
+          class="rainbow-hover btn btn-outline text-[1rem] hover:btn-primary hover:btn-primary bg-white text-black hover:text-white !dark:bg-white !dark:text-black">📖
+          Book Section</a></li>
       
-      <li><a href="{% url 'add_book' %}"
-          class="rainbow-hover btn btn-outline text-[1rem] hover:btn-primary hover:btn-primary bg-white text-black hover:text-white !dark:bg-white !dark:text-black">📖
-          Add Book</a></li>
-      <li><a href="{% url 'book_section' %}"
-          class="rainbow-hover btn btn-outline text-[1rem] hover:btn-primary hover:btn-primary bg-white text-black hover:text-white !dark:bg-white !dark:text-black">📖
-          Delete Book</a></li>
-      <li><a href="{% url 'get-all-book' None %}"
-          class="rainbow-hover btn btn-outline text-[1rem] hover:btn-primary hover:btn-primary bg-white text-black hover:text-white !dark:bg-white !dark:text-black">📖
-          Update Book</a></li>
      <li><a href="{% url 'get_categories'%}"
           class="rainbow-hover btn btn-outline text-[1rem] hover:btn-primary hover:btn-primary bg-white text-black hover:text-white !dark:bg-white !dark:text-black">📖
           Category Section</a></li>
+      <li><a href="{% url 'all_review_history'%}"
+          class="rainbow-hover btn btn-outline text-[1rem] hover:btn-primary hover:btn-primary bg-white text-black hover:text-white !dark:bg-white !dark:text-black">📖
+          Review Section</a></li>
       <div class="dropdown dropdown-end mx-[20px]">
       <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
         <button class="btn rainbow-hover text-white">⬇️ More</button>
@@ -66,17 +63,17 @@
         
         <li><a href="{% url 'borrow_history' %}"
           class="rainbow-hover btn my-[10px] btn-outline text-[1rem] hover:btn-primary hover:btn-primary bg-white text-black hover:text-white !dark:bg-white !dark:text-black">📖
-          Borrow History</a></li>
+          My Borrow History</a></li>
       <li><a href="{% url 'review_history' %}"
           class="rainbow-hover btn btn-outline my-[10px] text-[1rem] hover:btn-primary hover:btn-primary bg-white text-black hover:text-white !dark:bg-white !dark:text-black">
-         📝 My Review</a></li>
+         📝 My Review History</a></li>
       
       <li><a href="{% url 'deposit' %}"
           class="rainbow-hover btn btn-outline text-[1rem] my-[10px] hover:btn-primary hover:btn-primary bg-white text-black hover:text-white !dark:bg-white !dark:text-black">💳
           Deposit</a></li>
       <li><a href="{% url 'transaction_history' %}"
           class="rainbow-hover btn btn-outline text-[1rem] my-[10px] hover:btn-primary hover:btn-primary bg-white text-black hover:text-white !dark:bg-white !dark:text-black">📊
-          Transaction History</a></li>
+          My Transaction History</a></li>
       </ul>
     </div>  
    

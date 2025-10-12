@@ -9,6 +9,17 @@
             </div>
         </div>
     </div>
+    {% elif user.user_acc.user_type == "ADMINISTRATOR" %}
+    <div class="w-full justify-center items-center bg-[#ffffff] shadow-sm border-b">
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <div class="text-center">
+                <a href="{% url 'add_book' %}"
+          class="rainbow-hover btn btn-outline text-[1rem] hover:btn-primary hover:btn-primary bg-white text-black hover:text-white !dark:bg-white !dark:text-black">📖
+          Add Book</a>
+            </div>
+        </div>
+    </div>
     {% endif %}
 
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
