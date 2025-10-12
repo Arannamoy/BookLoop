@@ -14,7 +14,9 @@ class User {
     +ImageField user_image
     +CharField user_type
     +createUser()
+    +readUser()
     +updateUser()
+    +deleteUser()
 }
 
 class Book {
@@ -52,6 +54,10 @@ class Category {
     +ForeignKey added_by
     +DateTimeField add_date
     +SlugField slug
+    +createCategory()
+    +readCategory()
+    +updateCategory()
+    +deleteCategory()
 }
 
 class Discussion {
@@ -98,6 +104,8 @@ Book  <--  Borrow_record
 Book  <--  Discussion 
 Book  <--  Review
 Book  -->  Category 
+
+
 Borrow_record  <--  Review 
 %% %% ===== Relationships =====
 %% User "1" -- "many" Book : added_by
