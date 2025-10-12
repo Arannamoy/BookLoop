@@ -9,7 +9,77 @@ from reviews.models import Review as ReviewModel
 from django.utils import timezone
 import datetime
 
-# Create your views here.
+
+def bookSection(r):
+    if r.user.is_authenticated and r.user.user_acc.user_type == "ADMINISTRATOR":
+        books=BookModel.objects.all()
+        return render(r,'books.html',{'books':books})
+    else:
+         return redirect('login')
+
+
+def updateBook(r,id):
+    if r.user.is_authenticated and r.user.user_acc.user_type == "ADMINISTRATOR":
+        book=BookModel.objects.get(pk=id)
+        if r.method=="POST":
+             data=r.POST
+             book_image=r.FILES.get('book_image')
+             if data['title']:
+                book.title=data['title']
+             if data['description']:
+                book.description=data['description']
+             if data['author']:
+                 book.author=data['author']
+             if book_image:
+                 book.book_image=book_image
+             if data['borrow_price']:
+                 book.borrow_price=data['borrow_price']
+             if data['quantity']:
+                 book.quantity=data['quantity']
+             book.save()
+             return redirect('specific_book',book.id)
+        return render(r,'add_book_form.html',{'book':book})
+    else:
+         return redirect('login')
+    
+
+def deleteBook(r,id):
+    if r.user.is_authenticated and r.user.user_acc.user_type == "ADMINISTRATOR":
+        book=BookModel.objects.get(pk=id)
+        book.delete()
+        return redirect('get-all-book','None')
+    else:
+         return redirect('login')
+
+def addBook(r):
+    if r.user.is_authenticated and r.user.user_acc.user_type == "ADMINISTRATOR":
+        categories = CategoryModel.objects.all()
+        if r.method == "POST":
+            data = r.POST
+            book_image = r.FILES.get('book_image')
+            book = BookModel.objects.create(
+                title=data['title'],
+                description=data['description'],
+                author=data['author'],
+                borrow_price=data['borrow_price'],
+                book_image=book_image,
+                added_by=r.user,
+                quantity=data['quantity']
+            )
+            selected_categories= CategoryModel.objects.filter(title__in= r.POST.getlist('category'))
+            book.category.set(selected_categories)
+            book.save()
+
+            return redirect('home')
+
+        else:
+            return render(r, 'add_book_form.html', {'categories': categories})
+    else:
+        return redirect('login')
+          
+
+
+
 
 def getAllBook(r,slug=None):
     if slug==None:
