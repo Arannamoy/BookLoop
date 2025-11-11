@@ -34,15 +34,16 @@ graph TD
     subgraph E[পর্যবেক্ষণ ও রিট্রেনিং]
         D3 --> E1(দৈনিক লাভ/লোকসান রেকর্ড);
         D4 --> E1;
-        E1 --> A1; % ফিডব্যাক লুপ
+        E1 --> A1; %% ফিডব্যাক লুপ
     end
     
-    %% Connections and Styling
-    A[ডেটা সংগ্রহ ও প্রস্তুতি] --> B[ML/RL মডেল ট্রেনিং];
+    %% Global Connections (Ensure proper flow)
+    A --> B;
     B --> D;
     C --> D;
     D --> E;
     
+    %% Styling (Optional but helpful)
     style A1 fill:#BDECB6,stroke:#3C883C,stroke-width:2px
     style B4 fill:#FFD700,stroke:#DAA520,stroke-width:2px
     style C4 fill:#ADD8E6,stroke:#0000FF,stroke-width:2px
