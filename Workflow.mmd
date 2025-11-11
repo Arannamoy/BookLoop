@@ -1,49 +1,42 @@
 graph TD
     %% Define Subgraphs (Phases)
     subgraph A[ডেটা সংগ্রহ ও প্রস্তুতি]
-        A1[ঐতিহাসিক ডেটা লোড] --> A2(20 বছরের Min/H1 ডেটা);
-        A2 --> A3[ফিচার ইঞ্জিনিয়ারিং];
+        A1[ঐতিহাসিক ডেটা লোড] --> A2[20 বছরের Min/H1 ডেটা]
+        A2 --> A3[ফিচার ইঞ্জিনিয়ারিং]
     end
     
     subgraph B[ML/RL মডেল ট্রেনিং]
-        A3 --> B1(XGBoost ট্রেনিং);
-        A3 --> B2(LSTM/Transformer ট্রেনিং);
-        A3 --> B3(RL মডেল ট্রেনিং);
+        A3 --> B1[XGBoost ট্রেনিং]
+        A3 --> B2[LSTM/Transformer ট্রেনিং]
+        A3 --> B3[RL মডেল ট্রেনিং]
         
-        B1 --> B4{ML/RL সিগন্যাল};
-        B2 --> B4;
-        B3 --> B4;
+        B1 --> B4{ML/RL সিগন্যাল}
+        B2 --> B4
+        B3 --> B4
     end
     
     subgraph C[LLM এবং RAG বিশ্লেষণ (ক্রস-চেকিং)]
-        C1[লাইভ মার্কেট ডেটা ও নিউজ ফিড] --> C2(RAG সিস্টেম ইনপুট);
-        C2 --> C3{LLM ইনফারেন্স <br/> (Llama 4 API / Llama 3 Local)};
-        C3 --> C4[LLM সিগন্যাল <br/> (যুক্তি/সেন্ট্রিমেন্ট)];
+        C1[লাইভ মার্কেট ডেটা ও নিউজ ফিড] --> C2[RAG সিস্টেম ইনপুট]
+        C2 --> C3{LLM ইনফারেন্স\n(Llama 4 API / Llama 3 Local)}
+        C3 --> C4[LLM সিগন্যাল\n(যুক্তি/সেন্টিমেন্ট)]
     end
     
     subgraph D[চূড়ান্ত সিদ্ধান্ত ও এক্সিকিউশন]
-        B4 --> D1(সিগন্যাল কাউন্টিং: <br/> ML + RL + LLM);
-        C4 --> D1;
+        B4 --> D1[সিগন্যাল কাউন্টিং\n(ML + RL + LLM)]
+        C4 --> D1
         
-        D1 --> D2{মেজরিটি ভোটিং <br/> (BUY > SELL হলে BUY)};
-        
-        D2 -- YES/BUY --> D3[লাইভ/পেপার ট্রেড এক্সিকিউট <br/> (MT5 / Alpaca)];
-        D2 -- NO EXECUTION/HOLD --> D4[ট্রেড নয় (ঝুঁকি এড়ানো)];
+        D1 --> D2{মেজরিটি ভোটিং\n(BUY > SELL হলে BUY)}
+        D2 -- YES/BUY --> D3[লাইভ/পেপার ট্রেড এক্সিকিউট\n(MT5 / Alpaca)]
+        D2 -- NO/HOLD --> D4[ট্রেড নয়\n(ঝুঁকি এড়ানো)]
     end
     
     subgraph E[পর্যবেক্ষণ ও রিট্রেনিং]
-        D3 --> E1(দৈনিক লাভ/লোকসান রেকর্ড);
-        D4 --> E1;
-        E1 --> A1; %% ফিডব্যাক লুপ
+        D3 --> E1[দৈনিক লাভ/লোকসান রেকর্ড]
+        D4 --> E1
+        E1 --> A1
     end
     
-    %% Global Connections (Ensure proper flow)
-    A --> B;
-    B --> D;
-    C --> D;
-    D --> E;
-    
-    %% Styling (Optional but helpful)
+    %% Styling
     style A1 fill:#BDECB6,stroke:#3C883C,stroke-width:2px
     style B4 fill:#FFD700,stroke:#DAA520,stroke-width:2px
     style C4 fill:#ADD8E6,stroke:#0000FF,stroke-width:2px
