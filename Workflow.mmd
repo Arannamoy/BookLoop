@@ -3,12 +3,16 @@ graph TD
     subgraph A[ডেটা সংগ্রহ ও প্রস্তুতি]
         A1[ঐতিহাসিক ডেটা লোড] --> A2[20 বছরের Min/H1 ডেটা]
         A2 --> A3[ফিচার ইঞ্জিনিয়ারিং]
+        A3 --> A3a[Market Trend Analysis]  %% Added node
     end
     
     subgraph B[ML/RL মডেল ট্রেনিং]
         A3 --> B1[XGBoost ট্রেনিং]
         A3 --> B2[LSTM/Transformer ট্রেনিং]
         A3 --> B3[RL মডেল ট্রেনিং]
+        A3a --> B1
+        A3a --> B2
+        A3a --> B3
         
         B1 --> B4{ML/RL সিগন্যাল}
         B2 --> B4
@@ -17,6 +21,7 @@ graph TD
     
     subgraph C[LLM এবং RAG বিশ্লেষণ]
         C1[লাইভ মার্কেট ডেটা ও নিউজ ফিড] --> C2[RAG সিস্টেম ইনপুট]
+        A3a --> C2  %% Market trend input to LLM
         C2 --> C3{LLM ইনফারেন্স\nLlama 4 API / Llama 3 Local}
         C3 --> C4[LLM সিগন্যাল\nযুক্তি/সেন্টিমেন্ট]
     end
@@ -25,21 +30,25 @@ graph TD
         B4 --> D1[সিগন্যাল কাউন্টিং\nML + RL + LLM]
         C4 --> D1
         
-        D1 --> D2{মেজরিটি ভোটিং\nBUY > SELL হলে BUY}
-        D2 -- YES/BUY --> D3[লাইভ/পেপার ট্রেড এক্সিকিউট\nMT5 / Alpaca]
-        D2 -- NO/HOLD --> D4[ট্রেড নয়\nঝুঁকি এড়ানো]
+        D1 --> D2{মেজরিটি ভোটিং}
+        D2 -- BUY --> D3[লাইভ/পেপার ট্রেড এক্সিকিউট\nMT5 / Alpaca]
+        D2 -- SELL --> D4[লাইভ/পেপার ট্রেড SELL]
+        D2 -- HOLD --> D5[ট্রেড নয়\nঝুঁকি এড়ানো]
     end
     
     subgraph E[পর্যবেক্ষণ ও রিট্রেনিং]
         D3 --> E1[দৈনিক লাভ/লোকসান রেকর্ড]
         D4 --> E1
+        D5 --> E1
         E1 --> A1
     end
     
     %% Styling
-    style A1 fill:#BDECB6,stroke:#3C883C,stroke-width:2px
-    style B4 fill:#FFD700,stroke:#DAA520,stroke-width:2px
-    style C4 fill:#ADD8E6,stroke:#0000FF,stroke-width:2px
-    style D2 fill:#FF7F50,stroke:#E9967A,stroke-width:3px
-    style D3 fill:#90EE90,stroke:#3CB371,stroke-width:2px
-    style D4 fill:#F08080,stroke:#A52A2A,stroke-width:2px
+    style A1 fill:#FFFFFF,stroke:#3C883C,stroke-width:2px
+    style B4 fill:#FFFFFF,stroke:#DAA520,stroke-width:2px
+    style C4 fill:#FFFFFF,stroke:#1E90FF,stroke-width:2px
+    style D2 fill:#FFFFFF,stroke:#FF4500,stroke-width:3px
+    style D3 fill:#FFFFFF,stroke:#2E8B57,stroke-width:2px
+    style D4 fill:#FFFFFF,stroke:#B22222,stroke-width:2px
+    style D5 fill:#FFFFFF,stroke:#A52A2A,stroke-width:2px
+    style A3a fill:#FFFFFF,stroke:#FF8C00,stroke-width:2px
