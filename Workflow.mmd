@@ -3,7 +3,7 @@ graph TD
     subgraph A[ডেটা সংগ্রহ ও প্রস্তুতি]
         A1[ঐতিহাসিক ডেটা লোড] --> A2[20 বছরের Min/H1 ডেটা]
         A2 --> A3[ফিচার ইঞ্জিনিয়ারিং]
-        A3 --> A3a[Market Trend Analysis]  %% Added node
+        A3 --> A3a[Market Trend Analysis]
     end
     
     subgraph B[ML/RL মডেল ট্রেনিং]
@@ -21,7 +21,7 @@ graph TD
     
     subgraph C[LLM এবং RAG বিশ্লেষণ]
         C1[লাইভ মার্কেট ডেটা ও নিউজ ফিড] --> C2[RAG সিস্টেম ইনপুট]
-        A3a --> C2  %% Market trend input to LLM
+        A3a --> C2
         C2 --> C3{LLM ইনফারেন্স\nLlama 4 API / Llama 3 Local}
         C3 --> C4[LLM সিগন্যাল\nযুক্তি/সেন্টিমেন্ট]
     end
@@ -43,7 +43,7 @@ graph TD
         E1 --> A1
     end
     
-    %% Styling
+    %% Styling (All backgrounds white)
     style A1 fill:#FFFFFF,stroke:#3C883C,stroke-width:2px
     style B4 fill:#FFFFFF,stroke:#DAA520,stroke-width:2px
     style C4 fill:#FFFFFF,stroke:#1E90FF,stroke-width:2px
