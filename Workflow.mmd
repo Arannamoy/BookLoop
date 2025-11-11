@@ -15,19 +15,19 @@ graph TD
         B3 --> B4
     end
     
-    subgraph C[LLM এবং RAG বিশ্লেষণ (ক্রস-চেকিং)]
+    subgraph C[LLM এবং RAG বিশ্লেষণ]
         C1[লাইভ মার্কেট ডেটা ও নিউজ ফিড] --> C2[RAG সিস্টেম ইনপুট]
-        C2 --> C3{LLM ইনফারেন্স\n(Llama 4 API / Llama 3 Local)}
-        C3 --> C4[LLM সিগন্যাল\n(যুক্তি/সেন্টিমেন্ট)]
+        C2 --> C3{LLM ইনফারেন্স\nLlama 4 API / Llama 3 Local}
+        C3 --> C4[LLM সিগন্যাল\nযুক্তি/সেন্টিমেন্ট]
     end
     
     subgraph D[চূড়ান্ত সিদ্ধান্ত ও এক্সিকিউশন]
-        B4 --> D1[সিগন্যাল কাউন্টিং\n(ML + RL + LLM)]
+        B4 --> D1[সিগন্যাল কাউন্টিং\nML + RL + LLM]
         C4 --> D1
         
-        D1 --> D2{মেজরিটি ভোটিং\n(BUY > SELL হলে BUY)}
-        D2 -- YES/BUY --> D3[লাইভ/পেপার ট্রেড এক্সিকিউট\n(MT5 / Alpaca)]
-        D2 -- NO/HOLD --> D4[ট্রেড নয়\n(ঝুঁকি এড়ানো)]
+        D1 --> D2{মেজরিটি ভোটিং\nBUY > SELL হলে BUY}
+        D2 -- YES/BUY --> D3[লাইভ/পেপার ট্রেড এক্সিকিউট\nMT5 / Alpaca]
+        D2 -- NO/HOLD --> D4[ট্রেড নয়\nঝুঁকি এড়ানো]
     end
     
     subgraph E[পর্যবেক্ষণ ও রিট্রেনিং]
